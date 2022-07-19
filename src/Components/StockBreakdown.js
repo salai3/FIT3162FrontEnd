@@ -34,7 +34,7 @@ const StockBreakdown = () => {
       ];
 
     return(
-        <Card sx={{ maxWidth: 450}}>
+        <Card sx={{ minWidth: 450 , minHeight: 400}}>
             <CardHeader title={CardTitle}/>
             <CardContent>
                 <PieChart width={400} height={300}>
