@@ -4,7 +4,7 @@ const ShipmentTrackingMap = () => {
   const CardTitle = <Typography variant="p">Incoming Deliveries</Typography>;
 
   return (
-    <Card sx={{ minWidth: 450 , minHeight: 400}}>
+    <Card sx={{ height: 400}}>
       <CardHeader title={CardTitle} />
       <CardMedia
         component="img"
