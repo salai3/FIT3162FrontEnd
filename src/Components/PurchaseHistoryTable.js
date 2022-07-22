@@ -30,19 +30,7 @@ import {
     },
   }));
   
-  function createData(id, name, date_created, date_updated, status, cost) {
-    return { id, name, date_created, date_updated, status, cost: `$${cost.toFixed(2)}`};
-  }
-  
-  const rows = [
-    createData("S1281", "Company A", "16/07/2022", "20/03/2022", "In Progress", 142.00),
-    createData("S5511", "Company B", "13/07/2022", "20/03/2022", "In Progress", 28.50),
-    createData("S9182", "Company C", "12/07/2022", "15/03/2022", "In Progress", 47.11),
-    createData("S0012", "Company D", "29/06/2022", "13/03/2022", "Completed", 119.30),
-    createData("S8814", "Company E", "28/06/2022", "16/03/2022", "Completed", 110.00),
-  ];
-  
-  const PurchaseHistoryTable = () => {
+  const PurchaseHistoryTable = (props) => {
     return (
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -57,7 +45,7 @@ import {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {props.rows.map((row) => (
               <StyledTableRow key={row.id}>
                 <StyledTableCell component="th" scope="row">
                   {row.id}
