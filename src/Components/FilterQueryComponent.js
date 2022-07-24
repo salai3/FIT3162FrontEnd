@@ -27,8 +27,7 @@ const FilterQueryComponent = (props) => {
           id="dateCreated"
           label="Date Created"
           type="date"
-          onChange={(e) => {props.dispatchQuery({type: 'dateCreated', value: e.target.value})}} 
-          defaultValue={props.queryState.dateCreated}
+          onChange={(e) => {props.dispatchQuery({type: 'dateCreated', value: e.target.value})}}
           sx={{ width: 220 }}
           InputLabelProps={{
             shrink: true,
@@ -40,8 +39,7 @@ const FilterQueryComponent = (props) => {
           id="dateUpdated"
           label="Date Updated"
           type="date"
-          onChange={(e) => {props.dispatchQuery({type: 'dateUpdated', value: e.target.value})}} 
-          defaultValue={props.queryState.dateUpdated}
+          onChange={(e) => {props.dispatchQuery({type: 'dateUpdated', value: e.target.value})}}
           sx={{ width: 220 }}
           InputLabelProps={{
             shrink: true,

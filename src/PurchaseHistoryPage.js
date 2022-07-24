@@ -22,40 +22,80 @@ const rows = [
   createData(
     "S1281",
     "Company A",
-    "16/07/2022",
-    "20/03/2022",
+    "2022-07-16",
+    "2022-07-20",
     "In Progress",
     142.0
   ),
   createData(
     "S5511",
     "Company B",
-    "13/07/2022",
-    "20/03/2022",
+    "2022-07-13",
+    "2022-07-20",
     "In Progress",
     28.5
   ),
   createData(
     "S9182",
     "Company C",
-    "12/07/2022",
-    "15/03/2022",
+    "2022-07-12",
+    "2022-03-15",
     "In Progress",
     47.11
   ),
   createData(
     "S0012",
     "Company D",
-    "29/06/2022",
-    "13/03/2022",
+    "2022-06-29",
+    "2022-07-13",
     "Completed",
     119.3
   ),
   createData(
     "S8814",
     "Company E",
-    "28/06/2022",
-    "16/03/2022",
+    "2022-06-28",
+    "2022-06-16",
+    "Completed",
+    110.0
+  ),
+  createData(
+    "S1282",
+    "Company F",
+    "2022-07-16",
+    "2022-07-20",
+    "In Progress",
+    142.0
+  ),
+  createData(
+    "S5512",
+    "Company G",
+    "2022-07-13",
+    "2022-07-20",
+    "In Progress",
+    28.5
+  ),
+  createData(
+    "S9183",
+    "Company H",
+    "2022-07-12",
+    "2022-03-15",
+    "In Progress",
+    47.11
+  ),
+  createData(
+    "S0013",
+    "Company I",
+    "2022-06-29",
+    "2022-07-13",
+    "Completed",
+    119.3
+  ),
+  createData(
+    "S8815",
+    "Company J",
+    "2022-06-28",
+    "2022-06-16",
     "Completed",
     110.0
   ),
@@ -64,32 +104,25 @@ const rows = [
 const PurchaseHistoryPage = () => {
   const [filteredRows, setFilteredRows] = useState(rows);
 
-  /**Query Filter Component Data */
-  const currentDate = new Date().toJSON().slice(0, 10);
   const initialQueryState = {
     name: "",
     status: "All",
-    dateCreated: currentDate,
-    dateUpdated: currentDate,
+    dateCreated: '',
+    dateUpdated: '',
   };
   const queryReducer = (state, action) => {
-    if (action.type === "name") {
-      return { ...state, name: action.value };
+    switch (action.type) {
+      case "name":
+        return { ...state, name: action.value };
+      case "status":
+        return { ...state, status: action.value };
+      case "dateCreated":
+        return { ...state, dateCreated: action.value };
+      case "dateUpdated":
+        return { ...state, dateUpdated: action.value };
+      default:
+        return state;
     }
-
-    if (action.type === "status") {
-      return { ...state, status: action.value };
-    }
-
-    if (action.type === "dateCreated") {
-      return { ...state, dateCreated: action.value };
-    }
-
-    if (action.type === "dateUpdated") {
-      return { ...state, dateUpdated: action.value };
-    }
-
-    return state;
   };
   const [queryState, dispatchQuery] = useReducer(
     queryReducer,
@@ -97,18 +130,22 @@ const PurchaseHistoryPage = () => {
   );
 
   useEffect(() => {
+    const dateCreatedQuery = new Date(queryState.dateCreated);
+    const dateUpdatedQuery = new Date(queryState.dateUpdated);
     const updatedRows = rows.filter((row) => {
       return (
         (row.name.includes(queryState.name) ||
           queryState.name.trim().length === 0) &&
-        (row.status === queryState.status || queryState.status === "All")
+        (row.status === queryState.status || queryState.status === "All") &&
+        (queryState.dateCreated == '' || new Date(row.date_created) >= dateCreatedQuery) &&
+        (queryState.dateUpdated == '' || new Date(row.date_updated) >= dateUpdatedQuery)
       );
     });
     setFilteredRows(updatedRows);
   }, [queryState]);
 
   return (
-    <Container fluid sx={{ padding: "50px" }}>
+    <Container fluid="true" sx={{ padding: "50px" }}>
       <Card>
         <CardHeader title={CardTitle} />
         <CardContent>
