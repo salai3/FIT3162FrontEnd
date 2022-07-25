@@ -7,14 +7,14 @@ import { useReducer, useEffect, useState } from "react";
 const CardTitle = <Typography variant="h5">Purchase Order History</Typography>;
 
 /*Table Data */
-function createData(id, name, date_created, date_updated, status, cost) {
+function createData(supplierId, supplierName, dateCreated, dateUpdated, status, cost) {
   return {
-    id,
-    name,
-    date_created,
-    date_updated,
+    supplierId,
+    supplierName,
+    dateCreated,
+    dateUpdated,
     status,
-    cost: `$${cost.toFixed(2)}`,
+    cost
   };
 }
 
@@ -134,11 +134,11 @@ const PurchaseHistoryPage = () => {
     const dateUpdatedQuery = new Date(queryState.dateUpdated);
     const updatedRows = rows.filter((row) => {
       return (
-        (row.name.includes(queryState.name) ||
+        (row.supplierName.includes(queryState.name) ||
           queryState.name.trim().length === 0) &&
         (row.status === queryState.status || queryState.status === "All") &&
-        (queryState.dateCreated == '' || new Date(row.date_created) >= dateCreatedQuery) &&
-        (queryState.dateUpdated == '' || new Date(row.date_updated) >= dateUpdatedQuery)
+        (queryState.dateCreated === '' || new Date(row.dateCreated) >= dateCreatedQuery) &&
+        (queryState.dateUpdated === '' || new Date(row.dateUpdated) >= dateUpdatedQuery)
       );
     });
     setFilteredRows(updatedRows);

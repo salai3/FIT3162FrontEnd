@@ -154,22 +154,24 @@ const PurchaseHistoryTable = (props) => {
           />
           <TableBody>
             {props.rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .sort(getComparator(order, orderBy))
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
-                <StyledTableRow hover key={row.id}>
+                <StyledTableRow hover key={row.supplierId}>
                   <StyledTableCell component="th" scope="row">
-                    {row.id}
+                    {row.supplierId}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.name}</StyledTableCell>
+                  <StyledTableCell align="left">{row.supplierName}</StyledTableCell>
                   <StyledTableCell align="left">
-                    {row.date_created}
+                    {row.dateCreated}
                   </StyledTableCell>
                   <StyledTableCell align="left">
-                    {row.date_updated}
+                    {row.dateUpdated}
                   </StyledTableCell>
                   <StyledTableCell align="left">{row.status}</StyledTableCell>
-                  <StyledTableCell align="left">{row.cost}</StyledTableCell>
+                  <StyledTableCell align="left">{`$${row.cost.toFixed(
+                    2
+                  )}`}</StyledTableCell>
                 </StyledTableRow>
               ))}
             {emptyRows > 0 && (
