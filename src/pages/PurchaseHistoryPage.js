@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardContent, Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import FilterQueryComponent from "./Components/FilterQueryComponent";
-import PurchaseHistoryTable from "./Components/PurchaseHistoryTable";
+import FilterQueryComponent from "../Components/FilterQueryComponent";
+import PurchaseHistoryTable from "../Components/PurchaseHistoryTable";
 import { useReducer, useEffect, useState } from "react";
 
 const CardTitle = <Typography variant="h5">Purchase Order History</Typography>;

@@ -1,4 +1,5 @@
 import { AppBar, Container, Toolbar, Typography } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -12,21 +13,21 @@ const Navbar = () => {
         >
           Welcome Back, (Username)
         </Typography>
-        <Container maxWidth="md" sx={{display: "flex"}}>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Dashboard
+        <Container maxWidth="md" sx={{ display: "flex" }}>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            <NavLink to="/">Dashboard</NavLink>
           </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Purchase History
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            <NavLink to="/orders">Purchase History</NavLink>
           </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Order Tracking
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            <NavLink to="/">Order Tracking</NavLink>
           </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Inventory
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            <NavLink to="/">Inventory</NavLink>
           </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Supplier
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            <NavLink to="/">Supplier</NavLink>
           </Typography>
         </Container>
       </Toolbar>

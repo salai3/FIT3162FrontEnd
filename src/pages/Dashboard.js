@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
-import LowStockWarnings from "./Components/LowStockWarnings";
-import ShipmentTrackingMap from "./Components/ShipmentTrackingMap";
-import StockBreakdown from "./Components/StockBreakdown";
+import LowStockWarnings from "../Components/LowStockWarnings";
+import ShipmentTrackingMap from "../Components/ShipmentTrackingMap";
+import StockBreakdown from "../Components/StockBreakdown";
 
 const Dashboard = () => {
   return (
