@@ -12,19 +12,7 @@ import {
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
 
-function createData(id, name, current_stock, supplier_stock, action) {
-    return {id, name, current_stock, supplier_stock, action};
-}
-
-const rows = [
-  createData("P1281", "Product A", 4, 104, "ACTION_BTN"),
-  createData("P5511", "Product B", 9, 0, "ACTION_BTN"),
-  createData("P9182", "Product C", 13, 21, "ACTION_BTN"),
-  createData("P0012", "Product D", 21, 67, "ACTION_BTN"),
-  createData("P8814", "Product E", 22, 49, "ACTION_BTN"),
-];
-
-const LowStockWarnings = () => {
+const LowStockWarnings = (props) => {
   const CardTitle = <Typography variant="p">Low Stock Availibility</Typography>;
   return(
   <Card sx={{ height: 400 }}>
@@ -42,7 +30,7 @@ const LowStockWarnings = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {props.rows.map((row) => (
               <TableRow
                 key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
