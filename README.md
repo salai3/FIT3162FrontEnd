@@ -60,6 +60,10 @@ To get a local copy up and running follow these simple example steps.
 
 1. Make sure the current working directory is '/fit3162' containing the Dockerfile
    (If deploying from Windows use powershell, bash is fine on linux)
+   ```sh
+   git clone https://git-prd.infotech.monash.edu/fit3162Assignment/fit3162.git
+   cd fit3162
+   ```
 
 2. Build the docker container
    ```sh
@@ -79,4 +83,4 @@ To get a local copy up and running follow these simple example steps.
 [React Router]: https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white
 [Docker]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
 [Redux]: https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white
-[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
