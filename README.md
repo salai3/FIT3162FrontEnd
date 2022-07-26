@@ -19,10 +19,14 @@
 
 ### Built With
 
-#### Framework
-* [![React][React.js]][React-url]
+#### Frameworks & Libraries
+* ![NPM]
+* ![React]
+* ![React Router]
+* ![Redux]
+* ![Docker]
 
-#### React Libraries & Dependencies
+#### React Dependency versions
 * "@emotion/react": "^11.9.3"
 * "@emotion/styled": "^11.9.3"
 * "@mui/material": "^5.9.1"
@@ -51,12 +55,28 @@ To get a local copy up and running follow these simple example steps.
    npm start
    ```
 
+### Deployment
+
+
+1. Make sure the current working directory is '/fit3162' containing the Dockerfile
+   (If deploying from Windows use powershell, bash is fine on linux)
+
+2. Build the docker container
+   ```sh
+   docker build -t chace-react .
+   ```
+
+3. Start the newly built docker container and install dependencies
+   ```sh
+   docker run -it -v ${PWD}:/app -v /app/node_modules -dp 3000:3000 chace-react
+   ```
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
+[NPM]: https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white
+[React Router]: https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white
+[Docker]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
+[Redux]: https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white
 [react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[react-url]: https://reactjs.org/
-
-
-## Getting Started 
