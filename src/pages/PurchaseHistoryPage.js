@@ -1,25 +1,42 @@
-import { Card, CardHeader, CardContent, Typography } from "@mui/material";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Typography,
+  Grid,
+  MenuItem,
+  TextField,
+} from "@mui/material";
 import { Container } from "@mui/system";
-import FilterQueryComponent from "../Components/FilterQueryComponent";
 import PurchaseHistoryTable from "../Components/PurchaseHistoryTable";
 import { useReducer, useEffect, useState } from "react";
 
 const CardTitle = <Typography variant="h5">Purchase Order History</Typography>;
 
 /*Table Data */
-function createData(supplierId, supplierName, dateCreated, dateUpdated, status, cost) {
+function createData(
+  orderId,
+  supplierId,
+  supplierName,
+  dateCreated,
+  dateUpdated,
+  status,
+  cost
+) {
   return {
+    orderId,
     supplierId,
     supplierName,
     dateCreated,
     dateUpdated,
     status,
-    cost
+    cost,
   };
 }
 
 const rows = [
   createData(
+    "O1234",
     "S1281",
     "Company A",
     "2022-07-16",
@@ -28,6 +45,7 @@ const rows = [
     142.0
   ),
   createData(
+    "O5523",
     "S5511",
     "Company B",
     "2022-07-13",
@@ -36,6 +54,7 @@ const rows = [
     28.5
   ),
   createData(
+    "O9911",
     "S9182",
     "Company C",
     "2022-07-12",
@@ -44,6 +63,7 @@ const rows = [
     47.11
   ),
   createData(
+    "O9233",
     "S0012",
     "Company D",
     "2022-06-29",
@@ -52,6 +72,7 @@ const rows = [
     119.3
   ),
   createData(
+    "O1100",
     "S8814",
     "Company E",
     "2022-06-28",
@@ -60,6 +81,7 @@ const rows = [
     110.0
   ),
   createData(
+    "O9162",
     "S1282",
     "Company F",
     "2022-07-16",
@@ -68,6 +90,7 @@ const rows = [
     142.0
   ),
   createData(
+    "O5542",
     "S5512",
     "Company G",
     "2022-07-13",
@@ -76,6 +99,7 @@ const rows = [
     28.5
   ),
   createData(
+    "O0122",
     "S9183",
     "Company H",
     "2022-07-12",
@@ -84,6 +108,7 @@ const rows = [
     47.11
   ),
   createData(
+    "O8927",
     "S0013",
     "Company I",
     "2022-06-29",
@@ -92,6 +117,7 @@ const rows = [
     119.3
   ),
   createData(
+    "O0128",
     "S8815",
     "Company J",
     "2022-06-28",
@@ -101,14 +127,77 @@ const rows = [
   ),
 ];
 
+const FilterQueryComponent = (props) => {
+  return (
+    <Grid container paddingBottom={2} spacing={2}>
+      <Grid item>
+        <TextField
+          id="supplierName"
+          label="Supplier Name"
+          value={props.queryState.supplier}
+          type="search"
+          onChange={(e) => {
+            props.dispatchQuery({ type: "name", value: e.target.value });
+          }}
+        />
+      </Grid>
+      <Grid item>
+        <TextField
+          id="status"
+          select
+          label="Status"
+          value={props.queryState.status}
+          onChange={(e) => {
+            props.dispatchQuery({ type: "status", value: e.target.value });
+          }}
+        >
+          {["All", "In Progress", "Completed"].map((option) => (
+            <MenuItem key={option} value={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </TextField>
+      </Grid>
+      <Grid item>
+        <TextField
+          id="dateCreated"
+          label="Date Created"
+          type="date"
+          onChange={(e) => {
+            props.dispatchQuery({ type: "dateCreated", value: e.target.value });
+          }}
+          sx={{ width: 220 }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </Grid>
+      <Grid item>
+        <TextField
+          id="dateUpdated"
+          label="Date Updated"
+          type="date"
+          onChange={(e) => {
+            props.dispatchQuery({ type: "dateUpdated", value: e.target.value });
+          }}
+          sx={{ width: 220 }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </Grid>
+    </Grid>
+  );
+};
+
 const PurchaseHistoryPage = () => {
   const [filteredRows, setFilteredRows] = useState(rows);
 
   const initialQueryState = {
     name: "",
     status: "All",
-    dateCreated: '',
-    dateUpdated: '',
+    dateCreated: "",
+    dateUpdated: "",
   };
   const queryReducer = (state, action) => {
     switch (action.type) {
@@ -134,11 +223,15 @@ const PurchaseHistoryPage = () => {
     const dateUpdatedQuery = new Date(queryState.dateUpdated);
     const updatedRows = rows.filter((row) => {
       return (
-        (row.supplierName.includes(queryState.name) ||
-          queryState.name.trim().length === 0) &&
-        (row.status === queryState.status || queryState.status === "All") &&
-        (queryState.dateCreated === '' || new Date(row.dateCreated) >= dateCreatedQuery) &&
-        (queryState.dateUpdated === '' || new Date(row.dateUpdated) >= dateUpdatedQuery)
+        (queryState.name.trim().length === 0 ||
+          row.supplierName
+            .toLowerCase()
+            .includes(queryState.name.toLowerCase())) &&
+        (queryState.status === "All" || row.status === queryState.status) &&
+        (queryState.dateCreated === "" ||
+          new Date(row.dateCreated) >= dateCreatedQuery) &&
+        (queryState.dateUpdated === "" ||
+          new Date(row.dateUpdated) >= dateUpdatedQuery)
       );
     });
     setFilteredRows(updatedRows);

@@ -20,29 +20,25 @@ import { Link } from "react-router-dom";
 
 const headCells = [
   {
-    id: "supplierId",
-    label: "Supplier ID",
+    id: "productId",
+    label: "Product ID",
+    width: "20%"
   },
   {
-    id: "supplierName",
-    label: "Supplier Name",
+    id: "productName",
+    label: "Product Name",
+    width: "40%"
   },
   {
-    id: "dateCreated",
-    label: "Date Created",
+    id: "productQuantity",
+    label: "Current Stock",
+    width: "20%"
   },
   {
-    id: "dateUpdated",
-    label: "Date Updated",
-  },
-  {
-    id: "status",
-    label: "Status",
-  },
-  {
-    id: "cost",
-    label: "Cost",
-  },
+    id: "productQuantityOnOrder",
+    label: "Stock On Order",
+    width: "20%"
+  }
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -95,6 +91,7 @@ function SortableTableHead(props) {
             key={headCell.id}
             align="left"
             sortDirection={orderBy === headCell.id ? order : false}
+            width={headCell.width}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -124,7 +121,7 @@ SortableTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-const PurchaseHistoryTable = (props) => {
+const InventoryTable = (props) => {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [page, setPage] = React.useState(0);
@@ -162,22 +159,18 @@ const PurchaseHistoryTable = (props) => {
               .sort(getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
-                <StyledTableRow hover key={row.orderId}>
+                <StyledTableRow hover key={row.productId}>
                   <StyledTableCell component="th" scope="row">
-                    {row.supplierId}
+                    {row.productId}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.supplierName}</StyledTableCell>
+                  <StyledTableCell align="left">{row.productName}</StyledTableCell>
                   <StyledTableCell align="left">
-                    {row.dateCreated}
+                    {row.productQuantity}
                   </StyledTableCell>
                   <StyledTableCell align="left">
-                    {row.dateUpdated}
+                    {row.productQuantityOnOrder}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.status}</StyledTableCell>
-                  <StyledTableCell align="left">{`$${row.cost.toFixed(
-                    2
-                  )}`}</StyledTableCell>
-                  <StyledTableCell align="center"><Link to={`/orders/${row.orderId}`}><MoreHorizIcon /></Link></StyledTableCell>
+                  <StyledTableCell align="center"><Link to={`/products/${row.productId}`}><MoreHorizIcon /></Link></StyledTableCell>
                 </StyledTableRow>
               ))}
             {emptyRows > 0 && (
@@ -205,4 +198,4 @@ const PurchaseHistoryTable = (props) => {
   );
 };
 
-export default PurchaseHistoryTable;
+export default InventoryTable;
