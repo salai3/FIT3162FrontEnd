@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "../UI/Navbar";
 import Dashboard from "./Dashboard";
+import OrderDetails from "./OrderDetails";
 import PurchaseHistoryPage from "./PurchaseHistoryPage";
 
 const Layout = () => {
@@ -11,6 +12,7 @@ const Layout = () => {
             <Routes>
                 <Route path="*" element={<Dashboard />} />
                 <Route path="orders" element={<PurchaseHistoryPage />}/>
+                <Route path="orders/:orderId" element={<OrderDetails />}/>
             </Routes>
         </main>
     </React.Fragment>);

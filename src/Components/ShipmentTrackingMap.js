@@ -1,10 +1,10 @@
 import { Card, CardHeader, CardContent, CardMedia, Typography } from "@mui/material";
 
-const ShipmentTrackingMap = () => {
-  const CardTitle = <Typography variant="p">Incoming Deliveries</Typography>;
+const ShipmentTrackingMap = (props) => {
+  const CardTitle = <Typography variant="p">{props.title}</Typography>;
 
   return (
-    <Card sx={{ height: 400}}>
+    <Card>
       <CardHeader title={CardTitle} />
       <CardMedia
         component="img"
