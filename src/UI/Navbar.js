@@ -18,16 +18,13 @@ const Navbar = () => {
             <NavLink to="/">Dashboard</NavLink>
           </Typography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            <NavLink to="/orders">Purchase History</NavLink>
-          </Typography>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            <NavLink to="/">Order Tracking</NavLink>
+            <NavLink to="/orders">Orders</NavLink>
           </Typography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             <NavLink to="/products">Inventory</NavLink>
           </Typography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            <NavLink to="/">Supplier</NavLink>
+            <NavLink to="/suppliers">Suppliers</NavLink>
           </Typography>
         </Container>
       </Toolbar>

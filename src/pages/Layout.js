@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard";
 import InventoryPage from "./InventoryPage";
 import OrderDetails from "./OrderDetails";
 import PurchaseHistoryPage from "./PurchaseHistoryPage";
+import SuppliersPage from "./SuppliersPage";
 
 const Layout = () => {
     return(<React.Fragment>
@@ -15,6 +16,7 @@ const Layout = () => {
                 <Route path="orders" element={<PurchaseHistoryPage />}/>
                 <Route path="orders/:orderId" element={<OrderDetails />}/>
                 <Route path="products" element={<InventoryPage />} />
+                <Route path="suppliers" element={<SuppliersPage />} />
             </Routes>
         </main>
     </React.Fragment>);
