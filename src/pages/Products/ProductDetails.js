@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import ProductDetailsOrders from "../../Components/ProductDetailsOrders";
 import ProductDetailSummary from "../../Components/ProductDetailSummary";
+import ProductHistoryLineChart from "../../Components/ProductHistoryLineChart";
 
 const productDetails = {
   productId: "P20114",
@@ -13,78 +14,84 @@ const productOrders = [
   {
     orderId: "O20132",
     supplierName: "Company X",
-    orderCreated: "2022-07-18",
+    orderCreated: "2022-07-21",
     orderStatus: "In Progress",
     orderArrivalDate: "2022-07-23",
-    orderAmount: 12,
+    orderAmount: Math.floor(Math.random() * 100) + 1,
   },
   {
     orderId: "O20114",
     supplierName: "Company X",
-    orderCreated: "2022-07-18",
+    orderCreated: "2022-07-25",
     orderStatus: "In Progress",
-    orderArrivalDate: "2022-07-23",
-    orderAmount: 12,
+    orderArrivalDate: "2022-07-27",
+    orderAmount: Math.floor(Math.random() * 100) + 1,
   },
   {
     orderId: "O77261",
     supplierName: "Company X",
-    orderCreated: "2022-07-18",
+    orderCreated: "2022-07-29",
     orderStatus: "In Progress",
-    orderArrivalDate: "2022-07-23",
-    orderAmount: 12,
+    orderArrivalDate: "2022-07-31",
+    orderAmount: Math.floor(Math.random() * 100) + 1,
   },
   {
     orderId: "O20133",
     supplierName: "Company X",
-    orderCreated: "2022-07-18",
+    orderCreated: "2022-08-02",
     orderStatus: "In Progress",
-    orderArrivalDate: "2022-07-23",
-    orderAmount: 12,
+    orderArrivalDate: "2022-08-04",
+    orderAmount: Math.floor(Math.random() * 100) + 1,
   },
   {
     orderId: "O20115",
     supplierName: "Company X",
-    orderCreated: "2022-07-18",
+    orderCreated: "2022-08-06",
     orderStatus: "In Progress",
-    orderArrivalDate: "2022-07-23",
-    orderAmount: 12,
+    orderArrivalDate: "2022-08-08",
+    orderAmount: Math.floor(Math.random() * 100) + 1,
   },
   {
     orderId: "O77262",
     supplierName: "Company X",
-    orderCreated: "2022-07-18",
+    orderCreated: "2022-08-10",
     orderStatus: "In Progress",
-    orderArrivalDate: "2022-07-23",
-    orderAmount: 12,
+    orderArrivalDate: "2022-08-12",
+    orderAmount: Math.floor(Math.random() * 100) + 1,
   },
   {
     orderId: "O20134",
     supplierName: "Company X",
-    orderCreated: "2022-07-18",
+    orderCreated: "2022-08-14",
     orderStatus: "In Progress",
-    orderArrivalDate: "2022-07-23",
-    orderAmount: 12,
+    orderArrivalDate: "2022-08-16",
+    orderAmount: Math.floor(Math.random() * 100) + 1,
   },
   {
     orderId: "O20116",
     supplierName: "Company X",
-    orderCreated: "2022-07-18",
+    orderCreated: "2022-08-18",
     orderStatus: "In Progress",
-    orderArrivalDate: "2022-07-23",
-    orderAmount: 12,
+    orderArrivalDate: "2022-08-20",
+    orderAmount: Math.floor(Math.random() * 100) + 1,
   },
   {
     orderId: "O77263",
     supplierName: "Company X",
-    orderCreated: "2022-07-18",
+    orderCreated: "2022-08-22",
     orderStatus: "In Progress",
-    orderArrivalDate: "2022-07-23",
-    orderAmount: 12,
+    orderArrivalDate: "2022-08-24",
+    orderAmount: Math.floor(Math.random() * 100) + 1,
   },
 ];
 
 const ProductDetails = () => {
+  const productHistory = productOrders.map(product => (
+    {orderCreated: product.orderCreated,
+      orderArrival: product.orderArrivalDate,
+      orderAmount: product.orderAmount}
+  ));
+
   return (
     <Grid
       container
@@ -100,7 +107,7 @@ const ProductDetails = () => {
         <ProductDetailsOrders productOrders={productOrders} />
       </Grid>
       <Grid item align="center" xs={12} sm={12} md={12} lg={12} xl={12}>
-        {/**Implement Product Stock Level Graph */}
+        <ProductHistoryLineChart productHistory={productHistory} />
       </Grid>
     </Grid>
   );

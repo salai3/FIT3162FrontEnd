@@ -238,7 +238,7 @@ const PurchaseHistoryPage = () => {
   }, [queryState]);
 
   return (
-    <Container fluid="true" sx={{ padding: "50px" }}>
+    <Container fluid="true" sx={{ padding: "50px", width:"100%"}}>
       <Card>
         <CardHeader title={CardTitle} />
         <CardContent>
