@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Container } from "@mui/system";
-import PurchaseHistoryTable from "../Components/PurchaseHistoryTable";
+import PurchaseHistoryTable from "../../Components/PurchaseHistoryTable";
 import { useReducer, useEffect, useState } from "react";
 
 const CardTitle = <Typography variant="h5">Purchase Order History</Typography>;

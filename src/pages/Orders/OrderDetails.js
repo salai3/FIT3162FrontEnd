@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
-import OrderDetailProducts from "../Components/OrderDetailProducts";
-import OrderDetailSummary from "../Components/OrderDetailSummary";
-import OrderDetailUpdates from "../Components/OrderDetailsUpdates";
-import ShipmentTrackingMap from "../Components/ShipmentTrackingMap";
+import OrderDetailProducts from "../../Components/OrderDetailProducts";
+import OrderDetailSummary from "../../Components/OrderDetailSummary";
+import OrderDetailUpdates from "../../Components/OrderDetailsUpdates";
+import ShipmentTrackingMap from "../../Components/ShipmentTrackingMap";
 
 const orderDetails = {
   orderId: "O20114",

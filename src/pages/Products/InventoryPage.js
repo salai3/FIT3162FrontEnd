@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Container } from "@mui/system";
 import { useReducer, useEffect, useState } from "react";
-import InventoryTable from "../Components/InventoryTable";
+import InventoryTable from "../../Components/InventoryTable";
 
 const CardTitle = <Typography variant="h5">Product Inventory</Typography>;
 

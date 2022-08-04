@@ -2,6 +2,10 @@ import { AppBar, Container, Toolbar, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  let activeStyle = {
+    textDecoration: "underline",
+  };
+  
   return (
     <AppBar position="static">
       <Toolbar>
@@ -13,9 +17,11 @@ const Navbar = () => {
         >
           Welcome Back, (Username)
         </Typography>
-        <Container maxWidth="md" sx={{ display: "flex" }}>
+        <Container maxWidth="md" sx={{ display: "flex", color: 'white' }}>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            <NavLink to="/">Dashboard</NavLink>
+            <NavLink to="/" style={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            } >Dashboard</NavLink>
           </Typography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             <NavLink to="/orders">Orders</NavLink>

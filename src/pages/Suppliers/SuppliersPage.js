@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Container } from "@mui/system";
 import { useReducer, useEffect, useState } from "react";
-import SupplierTable from "../Components/SupplierTable";
+import SupplierTable from "../../Components/SupplierTable";
 
 const CardTitle = <Typography variant="h5">Suppliers</Typography>;
 

@@ -2,10 +2,10 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "../UI/Navbar";
 import Dashboard from "./Dashboard";
-import InventoryPage from "./InventoryPage";
-import OrderDetails from "./OrderDetails";
-import PurchaseHistoryPage from "./PurchaseHistoryPage";
-import SuppliersPage from "./SuppliersPage";
+import InventoryPage from "./Products/InventoryPage";
+import OrderDetails from "./Orders/OrderDetails";
+import PurchaseHistoryPage from "./Orders/PurchaseHistoryPage";
+import SuppliersPage from "./Suppliers/SuppliersPage";
 
 const Layout = () => {
     return(<React.Fragment>
