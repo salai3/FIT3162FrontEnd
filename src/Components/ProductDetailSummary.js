@@ -8,30 +8,30 @@ import {
   Typography
 } from "@mui/material";
 
-const CardTitle = <Typography variant="p">Order Details</Typography>;
+const CardTitle = <Typography variant="p">Product Details</Typography>;
 
-const OrderDetailSummary = (props) => {
+const ProductDetailSummary = (props) => {
   return (
     <Card>
       <CardHeader title={CardTitle} />
       <CardContent>
         <List dense={true}>
           <ListItem>
-            <ListItemText primary={`Order ID: ${props.orderId}`}></ListItemText>
+            <ListItemText primary={`Product ID: ${props.productId}`}></ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText
-              primary={`Supplier: ${props.supplierName}`}
+              primary={`Product Name: ${props.productName}`}
             ></ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText
-              primary={`Order Created: ${props.orderCreated}`}
+              primary={`Current Stock: ${props.productStock}`}
             ></ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText
-              primary={`Status: ${props.orderStatus} (Arrival Date: ${props.orderArrivalDate})`}
+              primary={`Stock On Order: ${props.productStockOnOrder}`}
             ></ListItemText>
           </ListItem>
         </List>
@@ -40,4 +40,4 @@ const OrderDetailSummary = (props) => {
   );
 };
 
-export default OrderDetailSummary;
+export default ProductDetailSummary;
