@@ -12,10 +12,10 @@ const CardTitle = <Typography variant="p">Product Details</Typography>;
 
 const ProductDetailSummary = (props) => {
   return (
-    <Card>
+    <Card sx={{minHeight: 525}}>
       <CardHeader title={CardTitle} />
       <CardContent>
-        <List dense={true}>
+        <List>
           <ListItem>
             <ListItemText primary={`Product ID: ${props.productId}`}></ListItemText>
           </ListItem>

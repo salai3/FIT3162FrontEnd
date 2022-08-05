@@ -11,6 +11,8 @@ import {
   TableCell,
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Link } from "react-router-dom";
 
 const LowStockWarnings = (props) => {
   const CardTitle = <Typography variant="p">Low Stock Availibility</Typography>;
@@ -41,7 +43,7 @@ const LowStockWarnings = (props) => {
                 <TableCell align="right">{row.name}</TableCell>
                 <TableCell align="right">{row.current_stock}</TableCell>
                 <TableCell align="right">{row.supplier_stock}</TableCell>
-                <TableCell align="right">{row.action}</TableCell>
+                <TableCell align="right"><Link to={`/products/${row.id}`}><MoreHorizIcon /></Link></TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -3,16 +3,16 @@ import LowStockWarnings from "../Components/LowStockWarnings";
 import ShipmentTrackingMap from "../Components/ShipmentTrackingMap";
 import StockBreakdown from "../Components/StockBreakdown";
 
-function createData(id, name, current_stock, supplier_stock, action) {
-  return { id, name, current_stock, supplier_stock, action };
+function createData(id, name, current_stock, supplier_stock) {
+  return { id, name, current_stock, supplier_stock };
 }
 
 const rows = [
-  createData("P1281", "Product A", 4, 104, "ACTION_BTN"),
-  createData("P5511", "Product B", 9, 0, "ACTION_BTN"),
-  createData("P9182", "Product C", 13, 21, "ACTION_BTN"),
-  createData("P0012", "Product D", 21, 67, "ACTION_BTN"),
-  createData("P8814", "Product E", 22, 49, "ACTION_BTN"),
+  createData("P1281", "Product A", 4, 104),
+  createData("P5511", "Product B", 9, 0),
+  createData("P9182", "Product C", 13, 21),
+  createData("P0012", "Product D", 21, 67),
+  createData("P8814", "Product E", 22, 49),
 ];
 
 const Dashboard = () => {

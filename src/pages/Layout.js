@@ -7,10 +7,12 @@ import ProductDetails from "./Products/ProductDetails";
 import OrderDetails from "./Orders/OrderDetails";
 import PurchaseHistoryPage from "./Orders/PurchaseHistoryPage";
 import SuppliersPage from "./Suppliers/SuppliersPage";
+import Breadcrumb from "../UI/Breadcrumb";
 
 const Layout = () => {
     return(<React.Fragment>
         <Navbar />
+        <Breadcrumb />
         <main>
             <Routes>
                 <Route path="*" element={<Dashboard />} />

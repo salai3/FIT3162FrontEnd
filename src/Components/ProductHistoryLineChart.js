@@ -129,7 +129,7 @@ const ProductHistoryLineChart = (props) => {
             <ReferenceLine
               x={deadlineArrivalDate.toISOString().slice(0, 10)}
               stroke="red"
-              label="Empty"
+              label="Arrival"
             />
             <ReferenceLine
               x="2022-08-24"
