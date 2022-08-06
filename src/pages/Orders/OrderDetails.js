@@ -1,18 +1,29 @@
 import { Grid } from "@mui/material";
+import { useState, useEffect } from "react";
+import { useParams } from'react-router-dom';
+import useHTTP from "../../hooks/use-http";
 import OrderDetailProducts from "../../Components/OrderDetailProducts";
 import OrderDetailSummary from "../../Components/OrderDetailSummary";
 import OrderDetailUpdates from "../../Components/OrderDetailsUpdates";
 import ShipmentTrackingMap from "../../Components/ShipmentTrackingMap";
 
-const orderDetails = {
-  orderId: "O20114",
-  supplierName: "Company X",
-  orderCreated: "2022-07-18",
-  orderStatus: "In Progress",
-  orderArrivalDate: "2022-07-23",
-};
-
 const OrderDetails = () => {
+  const [orderDetails, setOrderDetails] = useState(null);
+  const {isLoading, error, sendRequest: fetchOrders} = useHTTP();
+  const params = useParams();
+
+  useEffect(() => {
+    const transformOrders = ordersObj => {
+      for (const orderKey in ordersObj) {
+        if (ordersObj[orderKey].orderId === params.orderId){
+          setOrderDetails(ordersObj[orderKey]);
+          break;
+        }
+      }
+    };
+
+    fetchOrders({url: 'https://chace-test-default-rtdb.firebaseio.com/orders.json'}, transformOrders);
+  }, [fetchOrders]);
   return (
     <Grid
       container

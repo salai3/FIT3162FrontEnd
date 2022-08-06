@@ -10,122 +10,9 @@ import {
 import { Container } from "@mui/system";
 import PurchaseHistoryTable from "../../Components/PurchaseHistoryTable";
 import { useReducer, useEffect, useState } from "react";
+import useHTTP from "../../hooks/use-http";
 
 const CardTitle = <Typography variant="h5">Purchase Order History</Typography>;
-
-/*Table Data */
-function createData(
-  orderId,
-  supplierId,
-  supplierName,
-  dateCreated,
-  dateUpdated,
-  status,
-  cost
-) {
-  return {
-    orderId,
-    supplierId,
-    supplierName,
-    dateCreated,
-    dateUpdated,
-    status,
-    cost,
-  };
-}
-
-const rows = [
-  createData(
-    "O1234",
-    "S1281",
-    "Company A",
-    "2022-07-16",
-    "2022-07-20",
-    "In Progress",
-    142.0
-  ),
-  createData(
-    "O5523",
-    "S5511",
-    "Company B",
-    "2022-07-13",
-    "2022-07-20",
-    "In Progress",
-    28.5
-  ),
-  createData(
-    "O9911",
-    "S9182",
-    "Company C",
-    "2022-07-12",
-    "2022-03-15",
-    "In Progress",
-    47.11
-  ),
-  createData(
-    "O9233",
-    "S0012",
-    "Company D",
-    "2022-06-29",
-    "2022-07-13",
-    "Completed",
-    119.3
-  ),
-  createData(
-    "O1100",
-    "S8814",
-    "Company E",
-    "2022-06-28",
-    "2022-06-16",
-    "Completed",
-    110.0
-  ),
-  createData(
-    "O9162",
-    "S1282",
-    "Company F",
-    "2022-07-16",
-    "2022-07-20",
-    "In Progress",
-    142.0
-  ),
-  createData(
-    "O5542",
-    "S5512",
-    "Company G",
-    "2022-07-13",
-    "2022-07-20",
-    "In Progress",
-    28.5
-  ),
-  createData(
-    "O0122",
-    "S9183",
-    "Company H",
-    "2022-07-12",
-    "2022-03-15",
-    "In Progress",
-    47.11
-  ),
-  createData(
-    "O8927",
-    "S0013",
-    "Company I",
-    "2022-06-29",
-    "2022-07-13",
-    "Completed",
-    119.3
-  ),
-  createData(
-    "O0128",
-    "S8815",
-    "Company J",
-    "2022-06-28",
-    "2022-06-16",
-    "Completed",
-    110.0
-  ),
-];
 
 const FilterQueryComponent = (props) => {
   return (
@@ -191,7 +78,27 @@ const FilterQueryComponent = (props) => {
 };
 
 const PurchaseHistoryPage = () => {
-  const [filteredRows, setFilteredRows] = useState(rows);
+  const [orders, setOrders] = useState([]);
+  const [filteredRows, setFilteredRows] = useState([]);
+  const {isLoading, error, sendRequest: fetchOrders} = useHTTP();
+
+  useEffect(() => {
+    const transformOrders = ordersObj => {
+      const loadedOrders = [];
+  
+      for (const orderKey in ordersObj) {
+        loadedOrders.push(ordersObj[orderKey]);
+      }
+  
+      setOrders(loadedOrders);
+    };
+
+    fetchOrders({url: 'https://chace-test-default-rtdb.firebaseio.com/orders.json'}, transformOrders);
+  }, [fetchOrders]);
+
+  useEffect(() => {
+    setFilteredRows(orders);
+  }, [orders, setFilteredRows]);
 
   const initialQueryState = {
     name: "",
@@ -221,7 +128,7 @@ const PurchaseHistoryPage = () => {
   useEffect(() => {
     const dateCreatedQuery = new Date(queryState.dateCreated);
     const dateUpdatedQuery = new Date(queryState.dateUpdated);
-    const updatedRows = rows.filter((row) => {
+    const updatedRows = orders.filter((row) => {
       return (
         (queryState.name.trim().length === 0 ||
           row.supplierName

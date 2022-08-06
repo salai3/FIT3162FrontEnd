@@ -26,12 +26,12 @@ const OrderDetailSummary = (props) => {
           </ListItem>
           <ListItem>
             <ListItemText
-              primary={`Order Created: ${props.orderCreated}`}
+              primary={`Order Created: ${props.dateCreated}`}
             ></ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText
-              primary={`Status: ${props.orderStatus} (Arrival Date: ${props.orderArrivalDate})`}
+              primary={`Status: ${props.status} (Arrival Date: ${props.orderArrivalDate})`}
             ></ListItemText>
           </ListItem>
         </List>
