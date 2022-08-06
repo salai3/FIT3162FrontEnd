@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 const LowStockWarnings = (props) => {
   const CardTitle = <Typography variant="p">Low Stock Availibility</Typography>;
   return(
-  <Card sx={{ height: 400 }}>
+  <Card>
     <CardHeader title={CardTitle} />
     <CardContent>
       <TableContainer component={Paper}>

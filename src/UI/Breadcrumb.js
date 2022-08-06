@@ -1,6 +1,5 @@
 import { Box, Breadcrumbs, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Breadcrumb = () => {
   const location = useLocation();
@@ -14,7 +13,7 @@ const Breadcrumb = () => {
         {breadcrumbVals.map((path) => {
           return (
             <Typography color="h1">
-                {path}
+                {path.charAt(0).toUpperCase() + path.slice(1)}
             </Typography>
           );
         })}

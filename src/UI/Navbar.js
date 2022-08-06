@@ -27,7 +27,7 @@ const Navbar = () => {
             <NavLink to="/orders">Orders</NavLink>
           </Typography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            <NavLink to="/products">Inventory</NavLink>
+            <NavLink to="/products">Products</NavLink>
           </Typography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             <NavLink to="/suppliers">Suppliers</NavLink>

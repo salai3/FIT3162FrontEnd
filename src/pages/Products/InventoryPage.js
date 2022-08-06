@@ -9,6 +9,7 @@ import {
 import { Container } from "@mui/system";
 import { useReducer, useEffect, useState } from "react";
 import InventoryTable from "../../Components/InventoryTable";
+import useHTTP from "../../hooks/use-http";
 
 const CardTitle = <Typography variant="h5">Product Inventory</Typography>;
 
@@ -70,7 +71,28 @@ const FilterQueryComponent = (props) => {
 };
 
 const InventoryPage = () => {
-  const [filteredRows, setFilteredRows] = useState(rows);
+  const [products, setProducts] = useState([]);
+  const [filteredRows, setFilteredRows] = useState([]);
+  const {isLoading, error, sendRequest: fetchProducts} = useHTTP();
+
+  useEffect(() => {
+    const transformProducts = productsObj => {
+      const loadedProducts = [];
+  
+      for (const productKey in productsObj) {
+        console.log(productsObj[productKey]);
+        loadedProducts.push(productsObj[productKey]);
+      }
+  
+      setProducts(loadedProducts);
+    };
+
+    fetchProducts({url: 'https://chace-test-default-rtdb.firebaseio.com/products.json'}, transformProducts);
+  }, [fetchProducts]);
+
+  useEffect(() => {
+    setFilteredRows(products);
+  }, [products]);
 
   const initialQueryState = {
     id: "",
@@ -92,7 +114,7 @@ const InventoryPage = () => {
   );
 
   useEffect(() => {
-    const updatedRows = rows.filter((row) => {
+    const updatedRows = products.filter((row) => {
       return (
         (queryState.id.trim().length === 0 ||
           row.productId.includes(queryState.id)) &&
