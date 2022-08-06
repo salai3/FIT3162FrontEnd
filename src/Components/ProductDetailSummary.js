@@ -26,12 +26,12 @@ const ProductDetailSummary = (props) => {
           </ListItem>
           <ListItem>
             <ListItemText
-              primary={`Current Stock: ${props.productStock}`}
+              primary={`Current Stock: ${props.productQuantity}`}
             ></ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText
-              primary={`Stock On Order: ${props.productStockOnOrder}`}
+              primary={`Stock On Order: ${props.productQuantityOnOrder}`}
             ></ListItemText>
           </ListItem>
         </List>

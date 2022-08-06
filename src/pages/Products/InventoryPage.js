@@ -13,34 +13,6 @@ import useHTTP from "../../hooks/use-http";
 
 const CardTitle = <Typography variant="h5">Product Inventory</Typography>;
 
-/*Table Data */
-function createData(
-  productId,
-  productName,
-  productQuantity,
-  productQuantityOnOrder
-) {
-  return {
-    productId,
-    productName,
-    productQuantity,
-    productQuantityOnOrder,
-  };
-}
-
-const rows = [
-  createData("P1234", "Product A", 23, 5),
-  createData("P5523", "Product B", 122, 0),
-  createData("P9911", "Product C", 56, 15),
-  createData("P9233", "Product D", 24, 12),
-  createData("P1100", "Product E", 14, 0),
-  createData("P9162", "Product F", 23, 12),
-  createData("P5542", "Product G", 50, 25),
-  createData("P0122", "Product H", 10, 0),
-  createData("P8927", "Product I", 11, 0),
-  createData("P0128", "Product J", 12, 12),
-];
-
 const FilterQueryComponent = (props) => {
   return (
     <Grid container paddingBottom={2} spacing={2}>
@@ -92,7 +64,7 @@ const InventoryPage = () => {
 
   useEffect(() => {
     setFilteredRows(products);
-  }, [products]);
+  }, [products, setFilteredRows]);
 
   const initialQueryState = {
     id: "",
@@ -123,7 +95,7 @@ const InventoryPage = () => {
       );
     });
     setFilteredRows(updatedRows);
-  }, [queryState]);
+  }, [products, queryState]);
 
   return (
     <Container fluid="true" sx={{ padding: "50px" }}>

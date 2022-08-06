@@ -69,7 +69,7 @@ const ProductHistoryLineChart = (props) => {
   const deadlineData = {
       orderCreated: '2022-08-20',
       orderArrival: deadline.toISOString().slice(0, 10),
-      predAmount: Math.abs(avgConsumptionPerDay * remDays)
+      orderAmount: Math.abs(avgConsumptionPerDay * remDays)
   };
   
   
@@ -81,10 +81,10 @@ const ProductHistoryLineChart = (props) => {
   const deadlineArrivalData = {
     orderCreated: '2022-08-20',
     orderArrival: deadlineArrivalDate.toISOString().slice(0, 10),
-    predAmount: 0
+    orderAmount: 0
   }
 
-  productHistory[productHistory.length - 1].predAmount = productHistory[productHistory.length - 1].orderAmount;
+  productHistory[productHistory.length - 1].orderAmount = productHistory[productHistory.length - 1].orderAmount;
 
   if (deadline > deadlineArrivalDate) {
     productHistory.push(deadlineArrivalData);
@@ -147,12 +147,12 @@ const ProductHistoryLineChart = (props) => {
               stroke="#8884d8"
               activeDot={{ r: 8 }}
             />
-            <Line
+            {/* <Line
               type="monotone"
               dataKey="predAmount"
               stroke="red"
               strokeDasharray="5 5"
-            />
+            /> */}
           </LineChart>
         </ResponsiveContainer>
       </CardContent>

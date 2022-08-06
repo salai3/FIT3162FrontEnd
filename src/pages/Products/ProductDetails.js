@@ -1,14 +1,10 @@
 import { Grid } from "@mui/material";
+import { useState, useEffect } from "react";
+import { useParams } from'react-router-dom';
+import useHTTP from "../../hooks/use-http";
 import ProductDetailsOrders from "../../Components/ProductDetailsOrders";
 import ProductDetailSummary from "../../Components/ProductDetailSummary";
 import ProductHistoryLineChart from "../../Components/ProductHistoryLineChart";
-
-const productDetails = {
-  productId: "P20114",
-  productName: "Product X",
-  productStock: 12,
-  productStockOnOrder: 24,
-};
 
 const productOrders = [
   {
@@ -86,6 +82,23 @@ const productOrders = [
 ];
 
 const ProductDetails = () => {
+  const [productDetails, setProductDetails] = useState(null);
+  const {isLoading, error, sendRequest: fetchProducts} = useHTTP();
+  const params = useParams();
+
+  useEffect(() => {
+    const transformProducts = productsObj => {
+      for (const productKey in productsObj) {
+        if (productsObj[productKey].productId === params.productId){
+          setProductDetails(productsObj[productKey]);
+          break;
+        }
+      }
+    };
+
+    fetchProducts({url: 'https://chace-test-default-rtdb.firebaseio.com/products.json'}, transformProducts);
+  }, [fetchProducts]);
+  
   const productHistory = productOrders.map(product => (
     {orderCreated: product.orderCreated,
       orderArrival: product.orderArrivalDate,
