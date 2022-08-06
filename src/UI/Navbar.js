@@ -1,11 +1,22 @@
 import { AppBar, Container, Toolbar, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
+const ThemedNavLink = (props) => {
+  return (
+    <Typography variant="h5" sx={{ flexGrow: 1 }}>
+      <NavLink
+        to={props.to}
+        style={({ isActive }) => {
+          return { textDecoration: isActive ? "underline" : "none", color: "white" };
+        }}
+      >
+        {props.children}
+      </NavLink>
+    </Typography>
+  );
+};
+
 const Navbar = () => {
-  let activeStyle = {
-    textDecoration: "underline",
-  };
-  
   return (
     <AppBar position="static">
       <Toolbar>
@@ -17,21 +28,11 @@ const Navbar = () => {
         >
           Welcome Back, (Username)
         </Typography>
-        <Container maxWidth="md" sx={{ display: "flex", color: 'white' }}>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            <NavLink to="/" style={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            } >Dashboard</NavLink>
-          </Typography>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            <NavLink to="/orders">Orders</NavLink>
-          </Typography>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            <NavLink to="/products">Products</NavLink>
-          </Typography>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            <NavLink to="/suppliers">Suppliers</NavLink>
-          </Typography>
+        <Container maxWidth="md" sx={{ display: "flex", color: "white" }}>
+          <ThemedNavLink to="/">Dashboard</ThemedNavLink>
+          <ThemedNavLink to="/orders">Orders</ThemedNavLink>
+          <ThemedNavLink to="/products">Products</ThemedNavLink>
+          <ThemedNavLink to="/suppliers">Suppliers</ThemedNavLink>
         </Container>
       </Toolbar>
     </AppBar>
