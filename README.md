@@ -24,6 +24,7 @@
 * ![React]
 * ![React Router]
 * ![Redux]
+* ![Azure] SWA (sudo npm install -g @azure/static-web-apps-cli)
 
 #### React Dependency versions
 * "@emotion/react": "^11.9.3"
@@ -61,13 +62,20 @@ To get a local copy up and running follow these simple example steps.
    git clone https://git-prd.infotech.monash.edu/fit3162Assignment/fit3162.git
    cd fit3162
    ```
-2. Install NPM packages
+2. Execute Build Script
    ```sh
-   npm install
+   swa init --yes
+   swa build --app-location .
    ```
-3. Execute Build Script
+
+3. Connect to Azure Instance
    ```sh
-   npm run build
+   swa login
+   ```
+
+4. Deploy Build
+   ```sh
+   swa deploy
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -79,3 +87,4 @@ To get a local copy up and running follow these simple example steps.
 [Docker]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
 [Redux]: https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white
 [React]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[Azure]: (https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white)
