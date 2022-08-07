@@ -5,6 +5,7 @@ import useHTTP from "../../hooks/use-http";
 import ProductDetailsOrders from "../../Components/ProductDetailsOrders";
 import ProductDetailSummary from "../../Components/ProductDetailSummary";
 import ProductHistoryLineChart from "../../Components/ProductHistoryLineChart";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const productOrders = [
   {
@@ -113,6 +114,7 @@ const ProductDetails = () => {
       alignItems="center"
       sx={{ padding: "50px" }}
     >
+      { isLoading && <LoadingSpinner /> }
       <Grid item align="center" xs={6} sm={6} md={6} lg={6} xl={6}>
         <ProductDetailSummary {...productDetails} />
       </Grid>

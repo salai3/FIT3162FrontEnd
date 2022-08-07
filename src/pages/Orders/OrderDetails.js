@@ -6,6 +6,7 @@ import OrderDetailProducts from "../../Components/OrderDetailProducts";
 import OrderDetailSummary from "../../Components/OrderDetailSummary";
 import OrderDetailUpdates from "../../Components/OrderDetailsUpdates";
 import ShipmentTrackingMap from "../../Components/ShipmentTrackingMap";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const OrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState(null);
@@ -32,6 +33,7 @@ const OrderDetails = () => {
       alignItems="center"
       sx={{ padding: "50px" }}
     >
+      { isLoading && <LoadingSpinner /> }
       <Grid item align="center" xs={6} sm={6} md={6} lg={6} xl={6}>
         <OrderDetailSummary {...orderDetails} />
       </Grid>

@@ -9,6 +9,7 @@ import {
 import { Container } from "@mui/system";
 import { useReducer, useEffect, useState } from "react";
 import SupplierTable from "../../Components/SupplierTable";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 import useHTTP from "../../hooks/use-http";
 
 const CardTitle = <Typography variant="h5">Suppliers</Typography>;
@@ -103,6 +104,7 @@ const SuppliersPage = () => {
 
   return (
     <Container fluid="true" sx={{ padding: "50px" }}>
+      { isLoading && <LoadingSpinner /> }
       <Card>
         <CardHeader title={CardTitle} />
         <CardContent>

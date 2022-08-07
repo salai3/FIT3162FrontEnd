@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Container } from "@mui/system";
 import PurchaseHistoryTable from "../../Components/PurchaseHistoryTable";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 import { useReducer, useEffect, useState } from "react";
 import useHTTP from "../../hooks/use-http";
 
@@ -146,6 +147,7 @@ const PurchaseHistoryPage = () => {
 
   return (
     <Container fluid="true" sx={{ padding: "50px", width:"100%"}}>
+      { isLoading && <LoadingSpinner /> }
       <Card>
         <CardHeader title={CardTitle} />
         <CardContent>
