@@ -97,7 +97,7 @@ const ProductDetails = () => {
     };
 
     fetchProducts({url: 'https://chace-test-default-rtdb.firebaseio.com/products.json'}, transformProducts);
-  }, [fetchProducts]);
+  }, [params.productId, fetchProducts]);
   
   const productHistory = productOrders.map(product => (
     {orderCreated: product.orderCreated,

@@ -99,7 +99,7 @@ const SuppliersPage = () => {
       );
     });
     setFilteredRows(updatedRows);
-  }, [queryState]);
+  }, [queryState, suppliers]);
 
   return (
     <Container fluid="true" sx={{ padding: "50px" }}>

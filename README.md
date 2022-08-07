@@ -24,7 +24,6 @@
 * ![React]
 * ![React Router]
 * ![Redux]
-* ![Docker]
 
 #### React Dependency versions
 * "@emotion/react": "^11.9.3"
@@ -39,7 +38,7 @@
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### Installation
+### Running Development Instance (Debug)
 
 1. Clone the repo
    ```sh
@@ -55,24 +54,20 @@ To get a local copy up and running follow these simple example steps.
    npm start
    ```
 
-### Deployment
+### Building Deployment Instance (Prod)
 
-
-1. Make sure the current working directory is '/fit3162' containing the Dockerfile
-   (If deploying from Windows use powershell, bash is fine on linux)
+1. Clone the repo
    ```sh
    git clone https://git-prd.infotech.monash.edu/fit3162Assignment/fit3162.git
    cd fit3162
    ```
-
-2. Build the docker container
+2. Install NPM packages
    ```sh
-   docker build -t chace-react .
+   npm install
    ```
-
-3. Start the newly built docker container and install dependencies
+3. Execute Build Script
    ```sh
-   docker run -it -v ${PWD}:/app -v /app/node_modules -dp 3000:3000 chace-react
+   npm run build
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>

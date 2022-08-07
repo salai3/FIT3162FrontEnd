@@ -23,7 +23,7 @@ const OrderDetails = () => {
     };
 
     fetchOrders({url: 'https://chace-test-default-rtdb.firebaseio.com/orders.json'}, transformOrders);
-  }, [fetchOrders]);
+  }, [fetchOrders, params.orderId]);
   return (
     <Grid
       container

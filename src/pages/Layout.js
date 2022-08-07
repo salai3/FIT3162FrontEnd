@@ -1,13 +1,15 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+
 import Navbar from "../UI/Navbar";
 import Dashboard from "./Dashboard";
-import InventoryPage from "./Products/InventoryPage";
 import ProductDetails from "./Products/ProductDetails";
 import OrderDetails from "./Orders/OrderDetails";
 import PurchaseHistoryPage from "./Orders/PurchaseHistoryPage";
 import SuppliersPage from "./Suppliers/SuppliersPage";
 import Breadcrumb from "../UI/Breadcrumb";
+
+const InventoryPage = React.lazy(() => import('./Products/InventoryPage'));
 
 const Layout = () => {
     return(<React.Fragment>

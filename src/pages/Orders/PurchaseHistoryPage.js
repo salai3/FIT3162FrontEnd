@@ -142,7 +142,7 @@ const PurchaseHistoryPage = () => {
       );
     });
     setFilteredRows(updatedRows);
-  }, [queryState]);
+  }, [orders, queryState]);
 
   return (
     <Container fluid="true" sx={{ padding: "50px", width:"100%"}}>

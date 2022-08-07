@@ -69,7 +69,7 @@ const ProductHistoryLineChart = (props) => {
   const deadlineData = {
       orderCreated: '2022-08-20',
       orderArrival: deadline.toISOString().slice(0, 10),
-      orderAmount: Math.abs(avgConsumptionPerDay * remDays)
+      orderAmount: Math.floor(avgConsumptionPerDay * remDays)
   };
   
   
