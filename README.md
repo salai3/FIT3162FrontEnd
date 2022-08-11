@@ -24,7 +24,6 @@
 * ![React]
 * ![React Router]
 * ![Redux]
-* ![Azure] SWA (sudo npm install -g @azure/static-web-apps-cli)
 
 #### React Dependency versions
 * "@emotion/react": "^11.9.3"
@@ -66,15 +65,7 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    swa init --yes
    swa build --app-location .
-   ```
-
-3. Connect to Azure Instance
-   ```sh
    swa login
-   ```
-
-4. Deploy Build
-   ```sh
    swa deploy
    ```
 
