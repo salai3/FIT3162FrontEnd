@@ -5,12 +5,15 @@ import {
   Typography,
   Grid,
   TextField,
+  Box,
+  Button,
 } from "@mui/material";
 import { Container } from "@mui/system";
 import { useReducer, useEffect, useState } from "react";
 import InventoryTable from "../../Components/InventoryTable";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import useHTTP from "../../hooks/use-http";
+import NewProductModal from "./NewProductModal";
 
 const CardTitle = <Typography variant="h5">Product Inventory</Typography>;
 
@@ -46,21 +49,29 @@ const FilterQueryComponent = (props) => {
 const InventoryPage = () => {
   const [products, setProducts] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
-  const {isLoading, error, sendRequest: fetchProducts} = useHTTP();
+  const { isLoading, error, sendRequest: fetchProducts } = useHTTP();
+
+  //Modal Button State
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    const transformProducts = productsObj => {
+    const transformProducts = (productsObj) => {
       const loadedProducts = [];
-  
+
       for (const productKey in productsObj) {
         console.log(productsObj[productKey]);
         loadedProducts.push(productsObj[productKey]);
       }
-  
+
       setProducts(loadedProducts);
     };
 
-    fetchProducts({url: 'https://chace-test-default-rtdb.firebaseio.com/products.json'}, transformProducts);
+    fetchProducts(
+      { url: "https://chace-test-default-rtdb.firebaseio.com/products.json" },
+      transformProducts
+    );
   }, [fetchProducts]);
 
   useEffect(() => {
@@ -100,15 +111,20 @@ const InventoryPage = () => {
 
   return (
     <Container fluid="true" sx={{ padding: "50px" }}>
-      { isLoading && <LoadingSpinner /> }
+      {isLoading && <LoadingSpinner />}
       <Card>
         <CardHeader title={CardTitle} />
         <CardContent>
-          <FilterQueryComponent
-            queryState={queryState}
-            dispatchQuery={dispatchQuery}
-          />
-          <InventoryTable rows={filteredRows}/>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <FilterQueryComponent
+              queryState={queryState}
+              dispatchQuery={dispatchQuery}
+            />
+            <Button onClick={handleOpen}>+</Button>
+            <NewProductModal handleClose={handleClose} open={open} />
+          </Box>
+
+          <InventoryTable rows={filteredRows} />
         </CardContent>
       </Card>
     </Container>
