@@ -3,15 +3,18 @@ import { Box } from "@mui/system";
 import { useRef } from "react";
 import ModalWrapper from "../../UI/ModalWrapper";
 
-const NewSupplierModal = (props) => {
-  const nameRef = useRef("");
+const NewOrderModal = (props) => {
+  const idRef = useRef("");
+  // const nameRef = useRef("");
+  // const stockRef = useRef("");
+  // const stockOrderRef = useRef("");
 
-  async function addSupplierHandler(supplier) {
+  async function addOrderHandler(order) {
     const response = await fetch(
-      "https://chace-test-default-rtdb.firebaseio.com/suppliers.json",
+      "https://chace-test-default-rtdb.firebaseio.com/orders.json",
       {
         method: "POST",
-        body: JSON.stringify(supplier),
+        body: JSON.stringify(order),
         headers: {
           "Content-Type": "application/json",
         },
@@ -19,18 +22,17 @@ const NewSupplierModal = (props) => {
     );
 
     const data = await response.json();
-    console.log(data);
     window.location.reload(true);
   }
 
   function submitHandler(event) {
     event.preventDefault();
 
-    const supplier = {
-      supplierName: nameRef.current.value
+    const order = {
+      orderId: idRef.current.value
     };
 
-    addSupplierHandler(supplier);
+    addOrderHandler(order);
     
   }
 
@@ -44,13 +46,13 @@ const NewSupplierModal = (props) => {
         }}
       >
         <Typography variant="h5" sx={{ marginBottom: "30px" }}>
-          Add Supplier
+          Add Order
         </Typography>
-        <InputLabel htmlFor="supplier_name">Supplier Name</InputLabel>
+        <InputLabel htmlFor="order_id">Order ID</InputLabel>
           <OutlinedInput
             required
-            id="supplier_name"
-            inputRef={nameRef}
+            id="order_id"
+            inputRef={idRef}
             sx={{ width: "90%", marginBottom: "30px" }}
           />
           <Box sx={{ display: "flex", alignContent: "space-between" }}>
@@ -62,4 +64,4 @@ const NewSupplierModal = (props) => {
   );
 };
 
-export default NewSupplierModal;
+export default NewOrderModal;

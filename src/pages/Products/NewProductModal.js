@@ -1,19 +1,15 @@
 import { Button, InputLabel, OutlinedInput, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useRef } from "react";
-import useHTTP from "../../hooks/use-http";
 import ModalWrapper from "../../UI/ModalWrapper";
 
 const NewProductModal = (props) => {
-  const { isLoading, error, sendRequest: fetchProducts } = useHTTP();
   const idRef = useRef("");
   const nameRef = useRef("");
   const stockRef = useRef("");
   const stockOrderRef = useRef("");
 
   async function addProductHandler(product) {
-    console.log("addProductHandler")
-    console.log(product)
     const response = await fetch(
       "https://chace-test-default-rtdb.firebaseio.com/products.json",
       {
