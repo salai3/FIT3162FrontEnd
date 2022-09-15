@@ -5,12 +5,16 @@ import {
   Typography,
   Grid,
   TextField,
+  Button,
+  Box,
 } from "@mui/material";
 import { Container } from "@mui/system";
 import { useReducer, useEffect, useState } from "react";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SupplierTable from "../../Components/SupplierTable";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import useHTTP from "../../hooks/use-http";
+import NewSupplierModal from "./NewSupplierModal";
 
 const CardTitle = <Typography variant="h5">Suppliers</Typography>;
 
@@ -47,6 +51,11 @@ const SuppliersPage = () => {
   const [suppliers, setSuppliers] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
   const { isLoading, error, sendRequest: fetchSuppliers } = useHTTP();
+
+  //Modal Button State
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     const transformSuppliers = (suppliersObj) => {
@@ -104,14 +113,20 @@ const SuppliersPage = () => {
 
   return (
     <Container fluid="true" sx={{ padding: "50px" }}>
-      { isLoading && <LoadingSpinner /> }
+      {isLoading && <LoadingSpinner />}
       <Card>
         <CardHeader title={CardTitle} />
         <CardContent>
-          <FilterQueryComponent
-            queryState={queryState}
-            dispatchQuery={dispatchQuery}
-          />
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <FilterQueryComponent
+              queryState={queryState}
+              dispatchQuery={dispatchQuery}
+            />
+            <Button onClick={handleOpen}>
+              <AddCircleIcon />
+            </Button>
+            <NewSupplierModal handleClose={handleClose} open={open} />
+          </Box>
           <SupplierTable rows={filteredRows} />
         </CardContent>
       </Card>

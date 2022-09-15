@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Container } from "@mui/system";
 import { useReducer, useEffect, useState } from "react";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import InventoryTable from "../../Components/InventoryTable";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import useHTTP from "../../hooks/use-http";
@@ -120,7 +121,7 @@ const InventoryPage = () => {
               queryState={queryState}
               dispatchQuery={dispatchQuery}
             />
-            <Button onClick={handleOpen}>+</Button>
+            <Button onClick={handleOpen}><AddCircleIcon /></Button>
             <NewProductModal handleClose={handleClose} open={open} />
           </Box>
 
