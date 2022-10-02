@@ -1,17 +1,39 @@
-import { Card, CardHeader, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardHeader, CardContent, Typography } from "@mui/material";
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { memo, useCallback, useState } from "react";
+
+const mapStyles = {
+  width: '90%',
+  height: '400px'
+};
+
+const center = {
+  lat: -37.91506132699068,
+  lng: 145.1368336289172,
+};
 
 const ShipmentTrackingMap = (props) => {
   const CardTitle = <Typography variant="p">{props.title}</Typography>;
 
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyByItgBNRTmnQOrfvnnUKguMuoVEt8U5tI"
+  });
+
+  if (!isLoaded) return <div>Loading...</div>
+  console.log("test")
+
   return (
     <Card>
       <CardHeader title={CardTitle} />
-      <CardMedia
-        component="img"
-        height="194"
-        image="https://www.pedestrian.tv/wp-content/uploads/2022/05/10/melbourne-paris-end.png"
-        alt="map"
-      />
+      <GoogleMap
+        mapContainerStyle={mapStyles}
+        center={center}
+        zoom={15}
+      >
+        { /* Child components, such as markers, info windows, etc. */ }
+        <></>
+      </GoogleMap>
       <CardContent>
       <Typography variant="body2" color="text.secondary">
           Current Status: In Transit
@@ -28,4 +50,4 @@ const ShipmentTrackingMap = (props) => {
 };
 
 
-export default ShipmentTrackingMap;
+export default memo(ShipmentTrackingMap);
