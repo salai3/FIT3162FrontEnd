@@ -6,12 +6,16 @@ import {
   Grid,
   MenuItem,
   TextField,
+  Box,
+  Button,
 } from "@mui/material";
 import { Container } from "@mui/system";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import PurchaseHistoryTable from "../../Components/PurchaseHistoryTable";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import { useReducer, useEffect, useState } from "react";
 import useHTTP from "../../hooks/use-http";
+import NewOrderModal from "./NewOrderModal";
 
 const CardTitle = <Typography variant="h5">Purchase Order History</Typography>;
 
@@ -81,20 +85,28 @@ const FilterQueryComponent = (props) => {
 const PurchaseHistoryPage = () => {
   const [orders, setOrders] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
-  const {isLoading, error, sendRequest: fetchOrders} = useHTTP();
+  const { isLoading, error, sendRequest: fetchOrders } = useHTTP();
+
+  //Modal Button State
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    const transformOrders = ordersObj => {
+    const transformOrders = (ordersObj) => {
       const loadedOrders = [];
-  
+
       for (const orderKey in ordersObj) {
         loadedOrders.push(ordersObj[orderKey]);
       }
-  
+
       setOrders(loadedOrders);
     };
 
-    fetchOrders({url: 'https://chace-test-default-rtdb.firebaseio.com/orders.json'}, transformOrders);
+    fetchOrders(
+      { url: "https://chace-test-default-rtdb.firebaseio.com/orders.json" },
+      transformOrders
+    );
   }, [fetchOrders]);
 
   useEffect(() => {
@@ -146,15 +158,21 @@ const PurchaseHistoryPage = () => {
   }, [orders, queryState]);
 
   return (
-    <Container fluid="true" sx={{ padding: "50px", width:"100%"}}>
-      { isLoading && <LoadingSpinner /> }
+    <Container fluid="true" sx={{ padding: "50px", width: "100%" }}>
+      {isLoading && <LoadingSpinner />}
       <Card>
         <CardHeader title={CardTitle} />
         <CardContent>
-          <FilterQueryComponent
-            queryState={queryState}
-            dispatchQuery={dispatchQuery}
-          />
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <FilterQueryComponent
+              queryState={queryState}
+              dispatchQuery={dispatchQuery}
+            />
+            <Button onClick={handleOpen}>
+              <AddCircleIcon />
+            </Button>
+            <NewOrderModal handleClose={handleClose} open={open} />
+          </Box>
           <PurchaseHistoryTable rows={filteredRows} />
         </CardContent>
       </Card>
