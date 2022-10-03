@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import LowStockWarnings from "../Components/LowStockWarnings";
 import ShipmentTrackingMap from "../Components/ShipmentTrackingMap";
 import StockBreakdown from "../Components/StockBreakdown";
@@ -15,30 +15,47 @@ const rows = [
   createData("P8814", "Product E", 22, 49),
 ];
 
+function Item(props) {
+  const { sx, ...other } = props;
+  return (
+    <Box
+      sx={{
+        ...sx,
+      }}
+      {...other}
+    >
+      {props.children}
+    </Box>
+  );
+}
+
 const Dashboard = () => {
   return (
-    <Grid
-      container
-      justifyContent="center"
-      spacing={10}
-      alignItems="center"
-      sx={{ padding: "50px" }}
-    >
-      <Grid item align="center" xs={6} sm={6} md={6} lg={6} xl={6}>
-        <StockBreakdown
-          data={rows.map((row) => ({
-            name: row.name,
-            value: row.current_stock,
-          }))}
-        />
-      </Grid>
-      <Grid item align="center" xs={6} sm={6} md={6} lg={6} xl={6}>
-      <ShipmentTrackingMap title="Incoming Deliveries" />
-      </Grid>
-      <Grid item align="center" xs={12} sm={12} md={12} lg={12} xl={12}>
+    <div sx={{width: "100%"}}>
+      <Box sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        padding: "50px",
+        gap:"50px"
+      }}>
+        <Item sx={{width: "50%"}}>
+          <StockBreakdown
+            data={rows.map((row) => ({
+              name: row.name,
+              value: row.current_stock,
+            }))}
+          />
+        </Item>
+        <Item sx={{width: "50%"}}>
+          <ShipmentTrackingMap title="Incoming Deliveries" />
+        </Item>
+      </Box>
+
+      <Item sx={{padding: "50px"}}>
         <LowStockWarnings rows={rows} />
-      </Grid>
-    </Grid>
+      </Item>
+    </div>
   );
 };
 

@@ -7,7 +7,6 @@ const NewProductModal = (props) => {
   const idRef = useRef("");
   const nameRef = useRef("");
   const stockRef = useRef("");
-  const stockOrderRef = useRef("");
 
   async function addProductHandler(product) {
     const response = await fetch(
@@ -32,8 +31,7 @@ const NewProductModal = (props) => {
     const product = {
       productId: idRef.current.value,
       productName: nameRef.current.value,
-      productQuantity: stockRef.current.value,
-      productQuantityOnOrder: stockOrderRef.current.value,
+      productQuantity: stockRef.current.value
     };
 
     addProductHandler(product);
@@ -52,13 +50,6 @@ const NewProductModal = (props) => {
         <Typography variant="h5" sx={{ marginBottom: "30px" }}>
           Add Product
         </Typography>
-        <InputLabel htmlFor="product_id">Product ID</InputLabel>
-          <OutlinedInput
-            required
-            id="product_id"
-            inputRef={idRef}
-            sx={{ width: "90%", marginBottom: "30px" }}
-          />
           <InputLabel htmlFor="product_name">Product Name</InputLabel>
           <OutlinedInput
             required
@@ -72,14 +63,6 @@ const NewProductModal = (props) => {
             id="product_count"
             type="number"
             inputRef={stockRef}
-            sx={{ width: "90%", marginBottom: "30px" }}
-          />
-          <InputLabel htmlFor="product_quantity_on_order">Stock On Order</InputLabel>
-          <OutlinedInput
-            required
-            id="product_quantity_on_order"
-            type="number"
-            inputRef={stockOrderRef}
             sx={{ width: "90%", marginBottom: "30px" }}
           />
           <Box sx={{ display: "flex", alignContent: "space-between" }}>

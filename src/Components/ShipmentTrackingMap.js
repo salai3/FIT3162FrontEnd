@@ -24,7 +24,7 @@ const ShipmentTrackingMap = (props) => {
   console.log("test")
 
   return (
-    <Card>
+    <Card sx={{height: "100%"}}>
       <CardHeader title={CardTitle} />
       <GoogleMap
         mapContainerStyle={mapStyles}
