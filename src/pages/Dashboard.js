@@ -52,7 +52,7 @@ const Dashboard = () => {
         </Item>
       </Box>
 
-      <Item sx={{padding: "50px"}}>
+      <Item>
         <LowStockWarnings rows={rows} />
       </Item>
     </div>

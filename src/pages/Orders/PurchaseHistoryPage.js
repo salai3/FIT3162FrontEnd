@@ -145,8 +145,8 @@ const PurchaseHistoryPage = () => {
       return (
         (queryState.name.trim().length === 0 ||
           row.supplierName
-            .toLowerCase()
-            .includes(queryState.name.toLowerCase())) &&
+            ?.toLowerCase()
+            ?.includes(queryState.name.toLowerCase())) &&
         (queryState.status === "All" || row.status === queryState.status) &&
         (queryState.dateCreated === "" ||
           new Date(row.dateCreated) >= dateCreatedQuery) &&

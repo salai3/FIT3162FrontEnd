@@ -1,12 +1,14 @@
 import { Button, InputLabel, OutlinedInput, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import ModalWrapper from "../../UI/ModalWrapper";
 
 const NewProductModal = (props) => {
-  const idRef = useRef("");
   const nameRef = useRef("");
   const stockRef = useRef("");
+
+  const [nameError, setNameError] = useState(null);
+  const [quantityError, setQuantityError] = useState(null);
 
   async function addProductHandler(product) {
     const response = await fetch(
@@ -21,21 +23,29 @@ const NewProductModal = (props) => {
     );
 
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
     window.location.reload(true);
   }
 
   function submitHandler(event) {
     event.preventDefault();
 
-    const product = {
-      productId: idRef.current.value,
-      productName: nameRef.current.value,
-      productQuantity: stockRef.current.value
-    };
+    setNameError(nameRef.current.value.trim().length < 1);
+    setQuantityError(stockRef.current.value.trim().length < 1);
 
-    addProductHandler(product);
-    
+    console.log(nameError)
+    console.log(quantityError)
+
+    if (nameError || nameError == null || quantityError || quantityError == null) {
+      return;
+    } else {
+      const product = {
+        productName: nameRef.current.value,
+        productQuantity: stockRef.current.value
+      };
+  
+      addProductHandler(product);
+    }
   }
 
   return (
@@ -52,14 +62,14 @@ const NewProductModal = (props) => {
         </Typography>
           <InputLabel htmlFor="product_name">Product Name</InputLabel>
           <OutlinedInput
-            required
+            error={nameError}
             id="product_name"
             inputRef={nameRef}
             sx={{ width: "90%", marginBottom: "30px" }}
           />
           <InputLabel htmlFor="product_name">Stock Count</InputLabel>
           <OutlinedInput
-            required
+            error={nameError}
             id="product_count"
             type="number"
             inputRef={stockRef}
