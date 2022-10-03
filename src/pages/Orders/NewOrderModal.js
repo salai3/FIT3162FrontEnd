@@ -8,9 +8,14 @@ import ProductsList from "./ProductsList";
 const NewOrderModal = (props) => {
   const productRef = useRef("");
   const stockRef = useRef("");
+  const [currentProduct, setCurrentProduct] = useState('');
+  const [currentStock, setCurrentStock] = useState(-1);
   const [products, setProducts] = useState([]);
   const [productOptions, setProductOptions] = useState([]);
   const { isLoading, error, sendRequest: fetchProducts } = useHTTP();
+
+  const [nameError, setNameError] = useState(null);
+  const [quantityError, setQuantityError] = useState(null);
 
   useEffect(() => {
     const transformProducts = (productsObj) => {
@@ -44,6 +49,16 @@ const NewOrderModal = (props) => {
 
   const addProductHandler = () => {
     const selProduct = productRef.current.value;
+    console.log(currentProduct)
+    console.log(currentStock)
+
+    setNameError(currentProduct.trim().length < 1);
+    setQuantityError(currentStock.trim().length < 1 || parseInt(currentStock) < 0);
+
+    if (quantityError || quantityError == null) {
+      return;
+    }
+
     let product = products.findIndex((product) => (product.label === selProduct));
     if (product !== -1) {
       setProducts((prevProducts) => {
@@ -97,12 +112,14 @@ const NewOrderModal = (props) => {
           id="selected-product"
           options={productOptions}
           sx={{ width: 300 }}
-          renderInput={(params) => <TextField inputRef={productRef} {...params} />}
+          renderInput={(params) => <TextField label="Product" inputRef={productRef} {...params} />}
         />
         <TextField
+          error={quantityError}
           label="Quantity"
           id="product-quantity"
           inputRef={stockRef}
+          onChange={(e) => {setCurrentStock(e.target.value)}}
           sx={{ m: 1, width: "25ch" }}
         />
         <Button onClick={addProductHandler}>Add Product</Button>

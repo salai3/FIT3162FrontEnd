@@ -31,7 +31,7 @@ const NewProductModal = (props) => {
     event.preventDefault();
 
     setNameError(nameRef.current.value.trim().length < 1);
-    setQuantityError(stockRef.current.value.trim().length < 1);
+    setQuantityError(stockRef.current.value.trim().length < 1 || parseInt(stockRef.current.value) < 0);
 
     console.log(nameError)
     console.log(quantityError)

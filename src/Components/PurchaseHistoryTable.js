@@ -174,7 +174,7 @@ const PurchaseHistoryTable = (props) => {
                     {row.dateUpdated}
                   </StyledTableCell>
                   <StyledTableCell align="left">{row.status}</StyledTableCell>
-                  <StyledTableCell align="left">{`$${row.cost.toFixed(
+                  <StyledTableCell align="left">{`$${row?.cost?.toFixed(
                     2
                   )}`}</StyledTableCell>
                   <StyledTableCell align="center"><Link to={`/orders/${row.orderId}`}><MoreHorizIcon /></Link></StyledTableCell>

@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardContent, Typography } from "@mui/material";
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import { memo, useCallback, useState } from "react";
 
 const mapStyles = {
@@ -31,8 +31,7 @@ const ShipmentTrackingMap = (props) => {
         center={center}
         zoom={15}
       >
-        { /* Child components, such as markers, info windows, etc. */ }
-        <></>
+        <Marker {...center} />
       </GoogleMap>
       <CardContent>
       <Typography variant="body2" color="text.secondary">
