@@ -32,18 +32,18 @@ const LowStockWarnings = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.rows.map((row) => (
+            {props.products.map((product) => (
               <TableRow
-                key={row.id}
+                key={product.productID}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.id}
+                  {product.productID}
                 </TableCell>
-                <TableCell align="right">{row.name}</TableCell>
-                <TableCell align="right">{row.current_stock}</TableCell>
-                <TableCell align="right">{row.supplier_stock}</TableCell>
-                <TableCell align="right"><Link to={`/products/${row.id}`}><MoreHorizIcon /></Link></TableCell>
+                <TableCell align="right">{product.name}</TableCell>
+                <TableCell align="right">{0}</TableCell>
+                <TableCell align="right">{0}</TableCell>
+                <TableCell align="right"><Link to={`/products/${product.productID}`}><MoreHorizIcon /></Link></TableCell>
               </TableRow>
             ))}
           </TableBody>
