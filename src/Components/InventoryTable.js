@@ -159,18 +159,18 @@ const InventoryTable = (props) => {
               .sort(getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
-                <StyledTableRow hover key={row.productId}>
+                <StyledTableRow hover key={row.productID}>
                   <StyledTableCell component="th" scope="row">
-                    {row.productId}
+                    {row.productID}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.productName}</StyledTableCell>
+                  <StyledTableCell align="left">{row.name}</StyledTableCell>
                   <StyledTableCell align="left">
-                    {row.productQuantity}
+                    {row['current_stock']}
                   </StyledTableCell>
                   <StyledTableCell align="left">
-                    {row.productQuantityOnOrder}
+                    {row['stock_on_order']}
                   </StyledTableCell>
-                  <StyledTableCell align="center"><Link to={`/products/${row.productId}`}><MoreHorizIcon /></Link></StyledTableCell>
+                  <StyledTableCell align="center"><Link to={`/products/${row.productID}`}><MoreHorizIcon /></Link></StyledTableCell>
                 </StyledTableRow>
               ))}
             {emptyRows > 0 && (

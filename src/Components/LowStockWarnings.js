@@ -41,8 +41,8 @@ const LowStockWarnings = (props) => {
                   {product.productID}
                 </TableCell>
                 <TableCell align="right">{product.name}</TableCell>
-                <TableCell align="right">{0}</TableCell>
-                <TableCell align="right">{0}</TableCell>
+                <TableCell align="right">{product['current_stock']}</TableCell>
+                <TableCell align="right">{product['stock_on_order']}</TableCell>
                 <TableCell align="right"><Link to={`/products/${product.productID}`}><MoreHorizIcon /></Link></TableCell>
               </TableRow>
             ))}

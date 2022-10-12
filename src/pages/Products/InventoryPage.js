@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Container } from "@mui/system";
 import { useReducer, useEffect, useState } from "react";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import InventoryTable from "../../Components/InventoryTable";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import useHTTP from "../../hooks/use-http";
@@ -99,12 +99,14 @@ const InventoryPage = () => {
   );
 
   useEffect(() => {
-    const updatedRows = products.filter((row) => {
+    const updatedRows = products.filter((product) => {
       return (
         (queryState.id.trim().length === 0 ||
-          row.productId.includes(queryState.id)) &&
+          product.productID.includes(queryState.id)) &&
         (queryState.name.trim().length === 0 ||
-          row.productName.toLowerCase().includes(queryState.name.toLowerCase()))
+          product.name
+            .toLowerCase()
+            .includes(queryState.name.toLowerCase()))
       );
     });
     setFilteredRows(updatedRows);
@@ -121,7 +123,9 @@ const InventoryPage = () => {
               queryState={queryState}
               dispatchQuery={dispatchQuery}
             />
-            <Button onClick={handleOpen}><AddCircleIcon /></Button>
+            <Button onClick={handleOpen}>
+              <AddCircleIcon />
+            </Button>
             <NewProductModal handleClose={handleClose} open={open} />
           </Box>
 

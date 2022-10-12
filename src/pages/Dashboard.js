@@ -68,7 +68,7 @@ const Dashboard = () => {
           <StockBreakdown
             data={products.map((product) => ({
               name: product.name,
-              value: 0,
+              value: product['current_stock'],
             }))}
           />
         </Item>
