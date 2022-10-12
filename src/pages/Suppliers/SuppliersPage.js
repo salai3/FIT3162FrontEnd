@@ -9,12 +9,13 @@ import {
   Box,
 } from "@mui/material";
 import { Container } from "@mui/system";
-import { useReducer, useEffect, useState } from "react";
+import { useReducer, useEffect, useState, useContext } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SupplierTable from "../../Components/SupplierTable";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import useHTTP from "../../hooks/use-http";
 import NewSupplierModal from "./NewSupplierModal";
+import AuthContext from "../../store/auth-context";
 
 const CardTitle = <Typography variant="h5">Suppliers</Typography>;
 
@@ -57,6 +58,8 @@ const SuppliersPage = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const authCtx = useContext(AuthContext);
+
   useEffect(() => {
     const transformSuppliers = (suppliersObj) => {
       const loadedSuppliers = [];
@@ -69,7 +72,10 @@ const SuppliersPage = () => {
     };
 
     fetchSuppliers(
-      { url: "https://chace-test-default-rtdb.firebaseio.com/suppliers.json" },
+      {
+        url: "/api/supplier/",
+        headers: { Authorization: `Bearer ${authCtx.token}` },
+      },
       transformSuppliers
     );
   }, [fetchSuppliers]);

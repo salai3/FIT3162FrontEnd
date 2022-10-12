@@ -149,12 +149,12 @@ const SupplierTable = (props) => {
               .sort(getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
-                <StyledTableRow hover key={row.supplierId}>
+                <StyledTableRow hover key={row['supplierID_id']}>
                   <StyledTableCell component="th" scope="row">
-                    {row.supplierId}
+                    {row['supplierID_id']}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.supplierName}</StyledTableCell>
-                  <StyledTableCell align="center"><Link to={`/suppliers/${row.supplierId}`}><MoreHorizIcon /></Link></StyledTableCell>
+                  <StyledTableCell align="left">{row.name}</StyledTableCell>
+                  <StyledTableCell align="center"><Link to={`/suppliers/${row['supplierID_id']}`}><MoreHorizIcon /></Link></StyledTableCell>
                 </StyledTableRow>
               ))}
             {emptyRows > 0 && (

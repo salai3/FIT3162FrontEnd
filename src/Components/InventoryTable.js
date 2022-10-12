@@ -165,10 +165,10 @@ const InventoryTable = (props) => {
                   </StyledTableCell>
                   <StyledTableCell align="left">{row.name}</StyledTableCell>
                   <StyledTableCell align="left">
-                    {row['current_stock']}
+                    {row.stockAmount}
                   </StyledTableCell>
                   <StyledTableCell align="left">
-                    {row['stock_on_order']}
+                    {row.pendingStock}
                   </StyledTableCell>
                   <StyledTableCell align="center"><Link to={`/products/${row.productID}`}><MoreHorizIcon /></Link></StyledTableCell>
                 </StyledTableRow>

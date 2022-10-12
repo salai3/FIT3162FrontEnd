@@ -22,6 +22,7 @@ const useHTTP = (applyData) => {
 
       const data = await response.json();
       applyData(data);
+      console.log(data)
 
     } catch (err) {
       setError(err.message || 'Something went wrong!');

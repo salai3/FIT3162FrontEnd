@@ -20,12 +20,8 @@ import { Link } from "react-router-dom";
 
 const headCells = [
   {
-    id: "supplierId",
-    label: "Supplier ID",
-  },
-  {
-    id: "supplierName",
-    label: "Supplier Name",
+    id: "customerOrderID",
+    label: "Order ID",
   },
   {
     id: "dateCreated",
@@ -162,22 +158,21 @@ const PurchaseHistoryTable = (props) => {
               .sort(getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
-                <StyledTableRow hover key={row.orderId}>
+                <StyledTableRow hover key={row.customerOrderId}>
                   <StyledTableCell component="th" scope="row">
-                    {row.supplierId}
+                    {row.customerOrderID}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.supplierName}</StyledTableCell>
                   <StyledTableCell align="left">
                     {row.dateCreated}
                   </StyledTableCell>
                   <StyledTableCell align="left">
-                    {row.dateUpdated}
+                    {row.lastUpdated}
                   </StyledTableCell>
                   <StyledTableCell align="left">{row.status}</StyledTableCell>
                   <StyledTableCell align="left">{`$${row?.cost?.toFixed(
                     2
                   )}`}</StyledTableCell>
-                  <StyledTableCell align="center"><Link to={`/orders/${row.orderId}`}><MoreHorizIcon /></Link></StyledTableCell>
+                  <StyledTableCell align="center"><Link to={`/orders/${row.customerOrderID}`}><MoreHorizIcon /></Link></StyledTableCell>
                 </StyledTableRow>
               ))}
             {emptyRows > 0 && (

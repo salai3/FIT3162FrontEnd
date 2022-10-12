@@ -13,9 +13,10 @@ import { Container } from "@mui/system";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import PurchaseHistoryTable from "../../Components/PurchaseHistoryTable";
 import LoadingSpinner from "../../UI/LoadingSpinner";
-import { useReducer, useEffect, useState } from "react";
+import { useReducer, useEffect, useState, useContext } from "react";
 import useHTTP from "../../hooks/use-http";
 import NewOrderModal from "./NewOrderModal";
+import AuthContext from "../../store/auth-context";
 
 const CardTitle = <Typography variant="h5">Purchase Order History</Typography>;
 
@@ -86,6 +87,7 @@ const PurchaseHistoryPage = () => {
   const [orders, setOrders] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
   const { isLoading, error, sendRequest: fetchOrders } = useHTTP();
+  const authCtx = useContext(AuthContext);
 
   //Modal Button State
   const [open, setOpen] = useState(false);
@@ -104,7 +106,8 @@ const PurchaseHistoryPage = () => {
     };
 
     fetchOrders(
-      { url: "https://chace-test-default-rtdb.firebaseio.com/orders.json" },
+      { url: "/api/all_order/",
+        headers: {Authorization: `Bearer ${authCtx.token}`} },
       transformOrders
     );
   }, [fetchOrders]);
@@ -156,6 +159,8 @@ const PurchaseHistoryPage = () => {
     });
     setFilteredRows(updatedRows);
   }, [orders, queryState]);
+  console.log("orders")
+  console.log(orders)
 
   return (
     <Container fluid="true" sx={{ padding: "50px", width: "100%" }}>

@@ -43,7 +43,7 @@ export default function SignIn() {
     const formData = new FormData(event.currentTarget);
 
     const response = await fetch(
-      "http://127.0.0.1:8000/api/auth/login/",
+      "/api/auth/login/",
       {
         method: "POST",
         body: JSON.stringify({
@@ -58,8 +58,8 @@ export default function SignIn() {
 
     const data = await response.json();
     console.log(data);
-    authCtx.login(data.idToken);
-    //navigate("/");
+    authCtx.login(data.access);
+    navigate("/");
     
   };
 

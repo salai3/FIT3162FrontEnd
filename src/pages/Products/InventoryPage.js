@@ -9,12 +9,13 @@ import {
   Button,
 } from "@mui/material";
 import { Container } from "@mui/system";
-import { useReducer, useEffect, useState } from "react";
+import { useReducer, useEffect, useState, useContext } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import InventoryTable from "../../Components/InventoryTable";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import useHTTP from "../../hooks/use-http";
 import NewProductModal from "./NewProductModal";
+import AuthContext from "../../store/auth-context";
 
 const CardTitle = <Typography variant="h5">Product Inventory</Typography>;
 
@@ -51,6 +52,7 @@ const InventoryPage = () => {
   const [products, setProducts] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
   const { isLoading, error, sendRequest: fetchProducts } = useHTTP();
+  const authCtx = useContext(AuthContext);
 
   //Modal Button State
   const [open, setOpen] = useState(false);
@@ -70,7 +72,10 @@ const InventoryPage = () => {
     };
 
     fetchProducts(
-      { url: "https://chace-test-default-rtdb.firebaseio.com/products.json" },
+      {
+        url: "/api/products/",
+        headers: { Authorization: `Bearer ${authCtx.token}` },
+      },
       transformProducts
     );
   }, [fetchProducts]);
@@ -104,9 +109,7 @@ const InventoryPage = () => {
         (queryState.id.trim().length === 0 ||
           product.productID.includes(queryState.id)) &&
         (queryState.name.trim().length === 0 ||
-          product.name
-            .toLowerCase()
-            .includes(queryState.name.toLowerCase()))
+          product.name.toLowerCase().includes(queryState.name.toLowerCase()))
       );
     });
     setFilteredRows(updatedRows);
