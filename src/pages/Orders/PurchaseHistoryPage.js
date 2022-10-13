@@ -106,7 +106,7 @@ const PurchaseHistoryPage = () => {
     };
 
     fetchOrders(
-      { url: "/api/all_order/",
+      { url: "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/all_order/",
         headers: {Authorization: `Bearer ${authCtx.token}`} },
       transformOrders
     );

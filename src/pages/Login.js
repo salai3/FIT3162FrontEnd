@@ -43,7 +43,7 @@ export default function SignIn() {
     const formData = new FormData(event.currentTarget);
 
     const response = await fetch(
-      "/api/auth/login/",
+      "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/auth/login/",
       {
         method: "POST",
         body: JSON.stringify({
@@ -59,7 +59,7 @@ export default function SignIn() {
     const data = await response.json();
     console.log(data);
     authCtx.login(data.access);
-    navigate("/");
+    //navigate("/");
     
   };
 

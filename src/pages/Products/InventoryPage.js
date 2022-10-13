@@ -73,7 +73,7 @@ const InventoryPage = () => {
 
     fetchProducts(
       {
-        url: "/api/products/",
+        url: "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/products/",
         headers: { Authorization: `Bearer ${authCtx.token}` },
       },
       transformProducts

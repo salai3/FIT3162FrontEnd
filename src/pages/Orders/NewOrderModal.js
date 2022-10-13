@@ -1,7 +1,8 @@
 import { Autocomplete, Button, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import useHTTP from "../../hooks/use-http";
+import AuthContext from "../../store/auth-context";
 import ModalWrapper from "../../UI/ModalWrapper";
 import ProductsList from "./ProductsList";
 
@@ -13,6 +14,7 @@ const NewOrderModal = (props) => {
   const [products, setProducts] = useState([]);
   const [productOptions, setProductOptions] = useState([]);
   const { isLoading, error, sendRequest: fetchProducts } = useHTTP();
+  const authCtx = useContext(AuthContext)
 
   const [nameError, setNameError] = useState(null);
   const [quantityError, setQuantityError] = useState(null);
@@ -22,24 +24,27 @@ const NewOrderModal = (props) => {
       const loadedProducts = [];
 
       for (const productKey in productsObj) {
-        loadedProducts.push({id: productsObj[productKey].productId, label: productsObj[productKey].productName});
+        loadedProducts.push({id: productsObj[productKey].productID, label: productsObj[productKey].name});
       }
 
       setProductOptions(loadedProducts);
     };
 
     fetchProducts(
-      { url: "https://chace-test-default-rtdb.firebaseio.com/products.json" },
+      { url: "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/products/",
+    headers: {Authorization: `Bearer ${authCtx.token}`} },
       transformProducts
     );
   }, [fetchProducts]);
 
   async function addOrderHandler(order) {
-    await fetch("https://chace-test-default-rtdb.firebaseio.com/orders.json", {
+    console.log(order)
+    await fetch("http://ec2-3-95-178-55.compute-1.amazonaws.com/api/orders/", {
       method: "POST",
       body: JSON.stringify(order),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${authCtx.token}`
       },
     });
 

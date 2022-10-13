@@ -53,7 +53,7 @@ const Dashboard = () => {
 
     fetchProducts(
       {
-        url: "/api/low_stock/",
+        url: "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/low_stock/",
         headers: { Authorization: `Bearer ${authCtx.token}` },
       },
       transformProducts

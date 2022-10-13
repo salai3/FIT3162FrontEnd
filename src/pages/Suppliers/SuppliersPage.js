@@ -73,7 +73,7 @@ const SuppliersPage = () => {
 
     fetchSuppliers(
       {
-        url: "/api/supplier/",
+        url: "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/supplier/",
         headers: { Authorization: `Bearer ${authCtx.token}` },
       },
       transformSuppliers

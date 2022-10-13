@@ -1,19 +1,22 @@
 import { Button, InputLabel, OutlinedInput, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import AuthContext from "../../store/auth-context";
 import ModalWrapper from "../../UI/ModalWrapper";
 
 const NewSupplierModal = (props) => {
   const nameRef = useRef("");
+  const authCtx = useContext(AuthContext);
 
   async function addSupplierHandler(supplier) {
     const response = await fetch(
-      "https://chace-test-default-rtdb.firebaseio.com/suppliers.json",
+      "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/add_supplier/",
       {
         method: "POST",
         body: JSON.stringify(supplier),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${authCtx.token}`
         },
       }
     );
@@ -27,7 +30,9 @@ const NewSupplierModal = (props) => {
     event.preventDefault();
 
     const supplier = {
-      supplierName: nameRef.current.value
+      supplierName: nameRef.current.value,
+      phone: "",
+      address: ""
     };
 
     addSupplierHandler(supplier);

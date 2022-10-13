@@ -1,7 +1,8 @@
 import { Button, InputLabel, OutlinedInput, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import ModalWrapper from "../../UI/ModalWrapper";
+import AuthContext from "../../store/auth-context";
 
 const NewProductModal = (props) => {
   const nameRef = useRef("");
@@ -9,15 +10,17 @@ const NewProductModal = (props) => {
 
   const [nameError, setNameError] = useState(null);
   const [quantityError, setQuantityError] = useState(null);
+  const authCtx = useContext(AuthContext);
 
   async function addProductHandler(product) {
     const response = await fetch(
-      "https://chace-test-default-rtdb.firebaseio.com/products.json",
+      "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/add_products/",
       {
         method: "POST",
         body: JSON.stringify(product),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${authCtx.token}`
         },
       }
     );
@@ -40,8 +43,9 @@ const NewProductModal = (props) => {
       return;
     } else {
       const product = {
-        productName: nameRef.current.value,
-        productQuantity: stockRef.current.value
+        name: nameRef.current.value,
+        stockAmount: stockRef.current.value,
+        pendingStock: 0
       };
   
       addProductHandler(product);
