@@ -10,7 +10,7 @@ import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const OrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState(null);
-  const {isLoading, error, sendRequest: fetchOrders} = useHTTP();
+  const {isLoading, sendRequest: fetchOrders} = useHTTP();
   const params = useParams();
 
   useEffect(() => {

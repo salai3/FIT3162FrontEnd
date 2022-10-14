@@ -51,7 +51,7 @@ const FilterQueryComponent = (props) => {
 const InventoryPage = () => {
   const [products, setProducts] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
-  const { isLoading, error, sendRequest: fetchProducts } = useHTTP();
+  const { isLoading, sendRequest: fetchProducts } = useHTTP();
   const authCtx = useContext(AuthContext);
 
   //Modal Button State
@@ -78,7 +78,7 @@ const InventoryPage = () => {
       },
       transformProducts
     );
-  }, [fetchProducts]);
+  }, [fetchProducts, authCtx.token]);
 
   useEffect(() => {
     setFilteredRows(products);

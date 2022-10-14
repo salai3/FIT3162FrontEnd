@@ -84,7 +84,7 @@ const ProductDetails = () => {
   ];
   
   const [productDetails, setProductDetails] = useState(null);
-  const {isLoading, error, sendRequest: fetchProducts} = useHTTP();
+  const {isLoading, sendRequest: fetchProducts} = useHTTP();
   const params = useParams();
 
   useEffect(() => {

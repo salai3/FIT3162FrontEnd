@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardContent, Typography } from "@mui/material";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-import { memo, useCallback, useState } from "react";
+import { memo } from "react";
 
 const mapStyles = {
   width: "100%",

@@ -13,7 +13,7 @@ const NewProductModal = (props) => {
   const authCtx = useContext(AuthContext);
 
   async function addProductHandler(product) {
-    const response = await fetch(
+    await fetch(
       "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/add_products/",
       {
         method: "POST",
@@ -25,7 +25,7 @@ const NewProductModal = (props) => {
       }
     );
 
-    const data = await response.json();
+    //const data = await response.json();
     //console.log(data);
     window.location.reload(true);
   }

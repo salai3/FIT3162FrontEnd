@@ -51,7 +51,7 @@ const FilterQueryComponent = (props) => {
 const SuppliersPage = () => {
   const [suppliers, setSuppliers] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
-  const { isLoading, error, sendRequest: fetchSuppliers } = useHTTP();
+  const { isLoading, sendRequest: fetchSuppliers } = useHTTP();
 
   //Modal Button State
   const [open, setOpen] = useState(false);
@@ -78,7 +78,7 @@ const SuppliersPage = () => {
       },
       transformSuppliers
     );
-  }, [fetchSuppliers]);
+  }, [fetchSuppliers, authCtx.token]);
 
   useEffect(() => {
     setFilteredRows(suppliers);

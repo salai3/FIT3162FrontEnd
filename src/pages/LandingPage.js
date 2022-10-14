@@ -61,11 +61,11 @@ const LandingPage = () => {
                 Track you product with Chase! Sign up now
               </h1>
               <p className="lead py-3"></p>
-              <a className="btn btn-primary d-inline-flex flex-row align-items-center">
+              <a href="" className="btn btn-primary d-inline-flex flex-row align-items-center">
                 Register
                 <em className="ml-2" data-feather="arrow-right"></em>
               </a>
-              <a className="btn btn-primary d-inline-flex flex-row align-items-center" href="/login">
+              <a href="" className="btn btn-primary d-inline-flex flex-row align-items-center" href="/login">
                 Log In
                 <em className="ml-2" data-feather="arrow-right"></em>
               </a>
@@ -216,7 +216,7 @@ const LandingPage = () => {
           <div className="row mt-4">
             <div className="col-md-6 mx-auto text-center">
               <h5 className="mb-4">Have questions?</h5>
-              <a href="#" className="btn btn-primary">
+              <a href="" className="btn btn-primary">
                 Contact us
               </a>
             </div>

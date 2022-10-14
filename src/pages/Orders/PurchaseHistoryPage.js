@@ -86,7 +86,7 @@ const FilterQueryComponent = (props) => {
 const PurchaseHistoryPage = () => {
   const [orders, setOrders] = useState([]);
   const [filteredRows, setFilteredRows] = useState([]);
-  const { isLoading, error, sendRequest: fetchOrders } = useHTTP();
+  const { isLoading, sendRequest: fetchOrders } = useHTTP();
   const authCtx = useContext(AuthContext);
 
   //Modal Button State
@@ -110,7 +110,7 @@ const PurchaseHistoryPage = () => {
         headers: {Authorization: `Bearer ${authCtx.token}`} },
       transformOrders
     );
-  }, [fetchOrders]);
+  }, [fetchOrders, authCtx.token]);
 
   useEffect(() => {
     setFilteredRows(orders);
@@ -159,8 +159,6 @@ const PurchaseHistoryPage = () => {
     });
     setFilteredRows(updatedRows);
   }, [orders, queryState]);
-  console.log("orders")
-  console.log(orders)
 
   return (
     <Container fluid="true" sx={{ padding: "50px", width: "100%" }}>

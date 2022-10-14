@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import LowStockWarnings from "../Components/LowStockWarnings";
 import ShipmentTrackingMap from "../Components/ShipmentTrackingMap";
@@ -6,18 +6,6 @@ import StockBreakdown from "../Components/StockBreakdown";
 import useHTTP from "../hooks/use-http";
 import AuthContext from "../store/auth-context";
 import LoadingSpinner from "../UI/LoadingSpinner";
-
-function createData(id, name, current_stock, supplier_stock) {
-  return { id, name, current_stock, supplier_stock };
-}
-
-// const rows = [
-//   createData("P1281", "Product A", 4, 104),
-//   createData("P5511", "Product B", 9, 0),
-//   createData("P9182", "Product C", 13, 21),
-//   createData("P0012", "Product D", 21, 67),
-//   createData("P8814", "Product E", 22, 49),
-// ];
 
 function Item(props) {
   const { sx, ...other } = props;
@@ -35,7 +23,7 @@ function Item(props) {
 
 const Dashboard = () => {
   const [products, setProducts] = useState([]);
-  const { isLoading, error, sendRequest: fetchProducts } = useHTTP();
+  const { isLoading, sendRequest: fetchProducts } = useHTTP();
   const authCtx = useContext(AuthContext);
   console.log(authCtx.token)
 
@@ -58,7 +46,7 @@ const Dashboard = () => {
       },
       transformProducts
     );
-  }, [fetchProducts]);
+  }, [fetchProducts, authCtx.token]);
 
   return (
     <div sx={{ width: "100%" }}>

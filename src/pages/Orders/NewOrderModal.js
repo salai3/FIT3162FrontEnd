@@ -9,14 +9,14 @@ import ProductsList from "./ProductsList";
 const NewOrderModal = (props) => {
   const productRef = useRef("");
   const stockRef = useRef("");
-  const [currentProduct, setCurrentProduct] = useState('');
+  //const [currentProduct, setCurrentProduct ] = useState('');
   const [currentStock, setCurrentStock] = useState(-1);
   const [products, setProducts] = useState([]);
   const [productOptions, setProductOptions] = useState([]);
-  const { isLoading, error, sendRequest: fetchProducts } = useHTTP();
+  const { sendRequest: fetchProducts } = useHTTP();
   const authCtx = useContext(AuthContext)
 
-  const [nameError, setNameError] = useState(null);
+  //const [nameError, setNameError] = useState(null);
   const [quantityError, setQuantityError] = useState(null);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const NewOrderModal = (props) => {
     headers: {Authorization: `Bearer ${authCtx.token}`} },
       transformProducts
     );
-  }, [fetchProducts]);
+  }, [fetchProducts, authCtx.token]);
 
   async function addOrderHandler(order) {
     console.log(order)
@@ -54,10 +54,8 @@ const NewOrderModal = (props) => {
 
   const addProductHandler = () => {
     const selProduct = productRef.current.value;
-    console.log(currentProduct)
-    console.log(currentStock)
 
-    setNameError(currentProduct.trim().length < 1);
+    //setNameError(currentProduct.trim().length < 1);
     setQuantityError(currentStock.trim().length < 1 || parseInt(currentStock) < 0);
 
     if (quantityError || quantityError == null) {
