@@ -14,7 +14,7 @@ const NewProductModal = (props) => {
 
   async function addProductHandler(product) {
     await fetch(
-      "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/add_products/",
+      `${process.env.REACT_APP_CHACE_BACKEND}/api/add_products/`,
       {
         method: "POST",
         body: JSON.stringify(product),

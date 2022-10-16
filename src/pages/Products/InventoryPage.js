@@ -73,7 +73,7 @@ const InventoryPage = () => {
 
     fetchProducts(
       {
-        url: "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/products/",
+        url: `${process.env.REACT_APP_CHACE_BACKEND}/api/products/`,
         headers: { Authorization: `Bearer ${authCtx.token}` },
       },
       transformProducts

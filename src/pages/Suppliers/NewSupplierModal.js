@@ -10,7 +10,7 @@ const NewSupplierModal = (props) => {
 
   async function addSupplierHandler(supplier) {
     const response = await fetch(
-      "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/add_supplier/",
+      `${process.env.REACT_APP_CHACE_BACKEND}/api/add_supplier/`,
       {
         method: "POST",
         body: JSON.stringify(supplier),

@@ -41,7 +41,7 @@ const Dashboard = () => {
 
     fetchProducts(
       {
-        url: "http://ec2-3-95-178-55.compute-1.amazonaws.com/api/low_stock/",
+        url: `${process.env.REACT_APP_CHACE_BACKEND}/api/low_stock/`,
         headers: { Authorization: `Bearer ${authCtx.token}` },
       },
       transformProducts
