@@ -1,5 +1,5 @@
-import { Box, Grid } from "@mui/material";
-import { useState, useEffect, useContext, Fragment } from "react";
+import { Grid } from "@mui/material";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import useHTTP from "../../hooks/use-http";
 import OrderDetailProducts from "../../Components/OrderDetailProducts";
@@ -8,20 +8,6 @@ import OrderDetailUpdates from "../../Components/OrderDetailsUpdates";
 import ShipmentTrackingMap from "../../Components/ShipmentTrackingMap";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import AuthContext from "../../store/auth-context";
-
-function Item(props) {
-  const { sx, ...other } = props;
-  return (
-    <Box
-      sx={{
-        ...sx,
-      }}
-      {...other}
-    >
-      {props.children}
-    </Box>
-  );
-}
 
 const OrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState(null);
@@ -47,43 +33,30 @@ const OrderDetails = () => {
       transformOrders
     );
   }, [fetchOrders, params.orderId]);
+
+  console.log(orderDetails);
   return (
-    <Fragment>
-    {isLoading && <LoadingSpinner />}
-    <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          padding: "50px",
-          gap: "50px",
-        }}
-      >
-      
-      <Item sx={{ width: "50%"}}>
+    <Grid
+      container
+      justifyContent="center"
+      spacing={5}
+      alignItems="center"
+      sx={{ padding: "50px" }}
+    >
+      {isLoading && <LoadingSpinner />}
+      <Grid item align="center" xs={6} sm={6} md={6} lg={6} xl={6}>
         <OrderDetailSummary {...orderDetails} />
-      </Item>
-      <Item sx={{ width: "50%" }}>
+      </Grid>
+      <Grid item align="center" xs={6} sm={6} md={6} lg={6} xl={6}>
         <ShipmentTrackingMap title="Delivery Location" />
-      </Item>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          padding: "50px",
-          gap: "50px",
-        }}
-      >
-      <Item sx={{ width: "50%" }}>
+      </Grid>
+      <Grid item align="center" xs={6} sm={6} md={6} lg={6} xl={6}>
         <OrderDetailProducts />
-      </Item>
-      <Item sx={{ width: "50%" }}>
+      </Grid>
+      <Grid item align="center" xs={6} sm={6} md={6} lg={6} xl={6}>
         <OrderDetailUpdates />
-      </Item>
-      </Box>
-    </Fragment>
+      </Grid>
+    </Grid>
   );
 };
 

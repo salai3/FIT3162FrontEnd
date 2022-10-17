@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardContent, Typography } from "@mui/material";
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import { memo } from "react";
 
 const mapStyles = {
@@ -8,8 +8,8 @@ const mapStyles = {
 };
 
 const center = {
-  lat: -37.91506132699068,
-  lng: 145.1368336289172,
+  lat: -37.915,
+  lng: 145.136,
 };
 
 const ShipmentTrackingMap = (props) => {
@@ -28,7 +28,7 @@ const ShipmentTrackingMap = (props) => {
       <CardHeader title={CardTitle} />
       <CardContent>
         <GoogleMap mapContainerStyle={mapStyles} center={center} zoom={15}>
-          <Marker {...center} />
+          <MarkerF position={center} />
         </GoogleMap>
       </CardContent>
     </Card>

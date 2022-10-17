@@ -1,11 +1,26 @@
-import { Grid } from "@mui/material";
-import { useState, useEffect } from "react";
-import { useParams } from'react-router-dom';
+import { Box, Grid } from "@mui/material";
+import { useState, useEffect, useContext, Fragment } from "react";
+import { useParams } from "react-router-dom";
 import useHTTP from "../../hooks/use-http";
 import ProductDetailsOrders from "../../Components/ProductDetailsOrders";
 import ProductDetailSummary from "../../Components/ProductDetailSummary";
 import ProductHistoryLineChart from "../../Components/ProductHistoryLineChart";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import AuthContext from "../../store/auth-context";
+
+function Item(props) {
+  const { sx, ...other } = props;
+  return (
+    <Box
+      sx={{
+        ...sx,
+      }}
+      {...other}
+    >
+      {props.children}
+    </Box>
+  );
+}
 
 const ProductDetails = () => {
   const productOrders = [
@@ -82,49 +97,60 @@ const ProductDetails = () => {
       orderAmount: Math.floor(Math.random() * 100) + 1,
     },
   ];
-  
+
   const [productDetails, setProductDetails] = useState(null);
-  const {isLoading, sendRequest: fetchProducts} = useHTTP();
+  const { isLoading, sendRequest: fetchProducts } = useHTTP();
   const params = useParams();
+  const authCtx = useContext(AuthContext);
 
   useEffect(() => {
-    const transformProducts = productsObj => {
+    const transformProducts = (productsObj) => {
       for (const productKey in productsObj) {
-        if (productsObj[productKey].productId === params.productId){
+        if (productsObj[productKey].productID === params.productId) {
           setProductDetails(productsObj[productKey]);
           break;
         }
       }
     };
 
-    fetchProducts({url: 'https://chace-test-default-rtdb.firebaseio.com/products.json'}, transformProducts);
+    fetchProducts(
+      {
+        url: `${process.env.REACT_APP_CHACE_BACKEND}/api/products/`,
+        headers: { Authorization: `Bearer ${authCtx.token}` },
+      },
+      transformProducts
+    );
   }, [params.productId, fetchProducts]);
-  
-  const productHistory = productOrders.map(product => (
-    {orderCreated: product.orderCreated,
-      orderArrival: product.orderArrivalDate,
-      orderAmount: product.orderAmount}
-  ));
+
+  const productHistory = productOrders.map((product) => ({
+    orderCreated: product.orderCreated,
+    orderArrival: product.orderArrivalDate,
+    orderAmount: product.orderAmount,
+  }));
 
   return (
-    <Grid
-      container
-      justifyContent="center"
-      spacing={5}
-      alignItems="center"
-      sx={{ padding: "50px" }}
-    >
-      { isLoading && <LoadingSpinner /> }
-      <Grid item align="center" xs={6} sm={6} md={6} lg={6} xl={6}>
-        <ProductDetailSummary {...productDetails} />
-      </Grid>
-      <Grid item align="center" xs={6} sm={6} md={6} lg={6} xl={6}>
-        <ProductDetailsOrders productOrders={productOrders} />
-      </Grid>
-      <Grid item align="center" xs={12} sm={12} md={12} lg={12} xl={12}>
+    <Fragment>
+      {isLoading && <LoadingSpinner />}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          padding: "50px",
+          gap: "50px",
+        }}
+      >
+        <Item sx={{ width: "50%" }}>
+          <ProductDetailSummary {...productDetails} />
+        </Item>
+        <Item sx={{ width: "50%" }}>
+          <ProductDetailsOrders productOrders={productOrders} />
+        </Item>
+      </Box>
+      <Item sx={{ width: "100%" }}>
         <ProductHistoryLineChart productHistory={productHistory} />
-      </Grid>
-    </Grid>
+      </Item>
+    </Fragment>
   );
 };
 

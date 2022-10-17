@@ -4,9 +4,12 @@ const useHTTP = (applyData) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  
+
   const sendRequest = useCallback(async (requestConfig, applyData) => {
     setIsLoading(true);
     setError(null);
+    console.log(requestConfig)
     try {
       const response = await fetch(
         requestConfig.url, {

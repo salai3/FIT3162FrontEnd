@@ -168,7 +168,7 @@ const PurchaseHistoryTable = (props) => {
                   <StyledTableCell align="left">
                     {row.lastUpdated}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.status}</StyledTableCell>
+                  <StyledTableCell align="left">{row.orderStatus}</StyledTableCell>
                   <StyledTableCell align="left">{`$${row?.cost?.toFixed(
                     2
                   )}`}</StyledTableCell>

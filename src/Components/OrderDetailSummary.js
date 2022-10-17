@@ -12,17 +12,12 @@ const CardTitle = <Typography variant="p">Order Details</Typography>;
 
 const OrderDetailSummary = (props) => {
   return (
-    <Card>
+    <Card sx={{height: "100%"}} >
       <CardHeader title={CardTitle} />
       <CardContent>
         <List dense={true}>
           <ListItem>
-            <ListItemText primary={`Order ID: ${props.orderId}`}></ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary={`Supplier: ${props.supplierName}`}
-            ></ListItemText>
+            <ListItemText primary={`Order ID: ${props.customerOrderID}`}/>
           </ListItem>
           <ListItem>
             <ListItemText
@@ -31,7 +26,7 @@ const OrderDetailSummary = (props) => {
           </ListItem>
           <ListItem>
             <ListItemText
-              primary={`Status: ${props.status} (Arrival Date: ${props.orderArrivalDate})`}
+              primary={`Status: ${props.orderStatus} (Arrival Date: ${props.orderArrivalDate})`}
             ></ListItemText>
           </ListItem>
         </List>

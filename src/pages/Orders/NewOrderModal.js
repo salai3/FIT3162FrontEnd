@@ -39,7 +39,7 @@ const NewOrderModal = (props) => {
 
   async function addOrderHandler(order) {
     console.log(order)
-    await fetch(`${process.env.REACT_APP_CHACE_BACKEND}/api/orders/`, {
+    await fetch(`${process.env.REACT_APP_CHACE_BACKEND}/api/add_order/`, {
       method: "POST",
       body: JSON.stringify(order),
       headers: {

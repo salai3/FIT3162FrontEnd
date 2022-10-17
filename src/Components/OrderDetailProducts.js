@@ -83,6 +83,7 @@ const products = [
 ];
 
 const OrderDetailProducts = () => {
+  //console.log(props.products)
   return (
     <Card>
       <CardHeader title={CardTitle} />
