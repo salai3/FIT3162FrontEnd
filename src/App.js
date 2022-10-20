@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/login" element={<SignIn />} />
-        <Route path="*" element={authCtx.isLoggedIn ? <Layout /> : <Navigate to="/login" />} />
+        <Route path="*" element={authCtx.isLoggedIn ? <Layout /> : <Navigate to="/landing" />} />
         <Route path="/landing" element={<LandingPage />} />
       </Routes>
     </div>

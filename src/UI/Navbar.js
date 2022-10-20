@@ -1,5 +1,8 @@
-import { AppBar, Container, Toolbar, Typography } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { AppBar, Button, Container, Toolbar, Typography } from "@mui/material";
+import { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import AuthContext from "../store/auth-context";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const ThemedNavLink = (props) => {
   return (
@@ -17,6 +20,12 @@ const ThemedNavLink = (props) => {
 };
 
 const Navbar = () => {
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
+  const logoutHandler = () => {
+    authCtx.logout();
+    navigate("/landing")
+  }
   return (
     <AppBar position="static">
       <Toolbar>
@@ -33,6 +42,7 @@ const Navbar = () => {
           <ThemedNavLink to="/orders">Orders</ThemedNavLink>
           <ThemedNavLink to="/products">Products</ThemedNavLink>
           <ThemedNavLink to="/suppliers">Suppliers</ThemedNavLink>
+          <Button variant="contained" size="large" onClick={logoutHandler} startIcon={<LogoutIcon />} >LOGOUT</Button>
         </Container>
       </Toolbar>
     </AppBar>
